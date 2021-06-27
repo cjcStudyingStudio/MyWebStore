@@ -1,5 +1,7 @@
 package com.cjcStudying.domain;
 
+import com.cjcStudying.utls.DateUtils;
+
 import java.util.Date;
 
 public class User {
@@ -27,6 +29,50 @@ public class User {
                 '}';
     }
 
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        Date date = DateUtils.getDate(birthday);
+//        System.out.println("String print"+date);
+        this.birthday =date;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public void setUpdateTime(String updateTime) {
+        Date date = DateUtils.getDate(updateTime);
+//        System.out.println("String print"+date);
+        this.updateTime = date;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public int getUid() {
         return uid;
     }
@@ -49,37 +95,5 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Date getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 }

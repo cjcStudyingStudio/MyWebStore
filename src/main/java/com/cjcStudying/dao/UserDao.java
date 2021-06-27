@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.springframework.dao.DataAccessException;
 
 public interface UserDao {
 
@@ -12,20 +13,26 @@ public interface UserDao {
             "from user " +
             "where username = #{username} and password = #{password}")
     User findUserByUsernameAndPassword(@Param("username") String username,
-                                       @Param("password") String password);
+                                       @Param("password") String password)
+                                        throws DataAccessException;
 
     @Insert("insert into user " +
             "(uid,username,nickname,password,email,birthday,updatetime)" +
             "values" +
             "(#{user.uid},#{user.username},#{user.nickname},#{user.password}," +
             "#{user.email},#{user.birthday},#{user.updateTime})")
-    Boolean saveUser(@Param("user") User user);
+    Boolean saveUser(@Param("user") User user) throws DataAccessException;
 
+
+    /**
+     * @param user
+     * @return  插入失败时候是否返回False
+     */
     @Update("update user set "+
             "username = #{user.username},nickname = #{user.nickname}," +
             "password = #{user.password}," +
             "email = #{user.email},birthday = #{user.birthday}," +
             "updatetime = #{user.updateTime} " +
             "where uid = #{user.uid}")
-    Boolean updateUser(@Param("user") User user);
+    Boolean updateUser(@Param("user") User user) throws DataAccessException;
 }
