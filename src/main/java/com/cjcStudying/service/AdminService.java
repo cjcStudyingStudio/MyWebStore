@@ -1,5 +1,8 @@
 package com.cjcStudying.service;
 
+import com.cjcStudying.domain.Admin;
+import org.springframework.dao.DataAccessException;
+
 public interface AdminService {
-    void login(String username,String password);
+    Admin login(String username, String password) throws DataAccessException;
 }

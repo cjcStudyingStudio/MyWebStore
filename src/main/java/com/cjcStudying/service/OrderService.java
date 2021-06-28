@@ -1,16 +1,17 @@
 package com.cjcStudying.service;
 
 import com.cjcStudying.domain.Order;
+import org.springframework.dao.DataAccessException;
 
 import java.util.List;
 
 public interface OrderService {
 
-    Boolean placeOrder(Order order);
+    Boolean placeOrder(Order order)throws DataAccessException;
 
-    Boolean updateOrderState(int state);
+    Boolean updateOrderState(String oid,int state) throws DataAccessException;
 
-    List<Order> findAllOrder();
+    List<Order> findAllOrder() throws DataAccessException;
 
-    Order findOrderById(String oid);
+    Order findOrderById(String oid) throws DataAccessException;
 }

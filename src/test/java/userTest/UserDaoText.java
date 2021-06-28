@@ -1,5 +1,8 @@
+package userTest;
+
 import com.cjcStudying.dao.UserDao;
 import com.cjcStudying.domain.User;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +17,7 @@ import java.util.Date;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:applicationContext.xml")
-public class DaoText {
+public class UserDaoText {
 
     @Autowired
     UserDao userDao;

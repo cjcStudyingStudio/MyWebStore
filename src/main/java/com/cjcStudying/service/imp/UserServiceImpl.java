@@ -8,12 +8,12 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 @Service("UserService")
-public class UserServiceImp implements UserService {
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDao userDao;
 
-    public User login(String username, String password) {
+    public User login(String username, String password) throws DataAccessException{
         User user = null;
         try {
             user = userDao.findUserByUsernameAndPassword(username, password);
@@ -24,7 +24,7 @@ public class UserServiceImp implements UserService {
         }
     }
 
-    public Boolean register(User user) {
+    public Boolean register(User user) throws DataAccessException{
         Boolean flag = false;
         try {
                 flag = userDao.saveUser(user);
@@ -35,7 +35,7 @@ public class UserServiceImp implements UserService {
         }
     }
 
-    public Boolean updateUser(User user) {
+    public Boolean updateUser(User user) throws DataAccessException{
         Boolean flag = false;
         try {
                 flag = userDao.updateUser(user);

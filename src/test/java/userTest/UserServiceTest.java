@@ -1,3 +1,5 @@
+package userTest;
+
 import com.cjcStudying.domain.User;
 import com.cjcStudying.service.UserService;
 import org.junit.Assert;
