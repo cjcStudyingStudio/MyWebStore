@@ -42,7 +42,7 @@ public class UserControler {
             Cookie cookie1 = new Cookie("password", password);
             response.addCookie(cookie);
             response.addCookie(cookie1);
-            return "/index.jsp";
+            return "redirect:/index.jsp";
         }
         return "/user/login.jsp";
     }
