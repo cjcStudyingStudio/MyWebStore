@@ -1,8 +1,10 @@
 package com.cjcStudying.domain;
 
 import com.cjcStudying.utls.DateUtils;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.Random;
 
 public class User {
     private String username;
@@ -10,10 +12,16 @@ public class User {
     private int uid;
     private String nickname;
     private String email;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
     private Date updateTime;
 
     public User() {
+        int i = new Random().nextInt();
+        int abs = Math.abs(i);
+        this.uid = abs;
+        Date date = new Date();
+        this.updateTime = date;
     }
 
     @Override
@@ -34,7 +42,7 @@ public class User {
     }
 
     public void setBirthday(String birthday) {
-        Date date = DateUtils.getDate(birthday);
+        Date date = DateUtils.getDate2(birthday);
 //        System.out.println("String print"+date);
         this.birthday =date;
     }
@@ -47,6 +55,10 @@ public class User {
         Date date = DateUtils.getDate(updateTime);
 //        System.out.println("String print"+date);
         this.updateTime = date;
+    }
+
+    public void setUid(int uid) {
+        this.uid = uid;
     }
 
     public Date getBirthday() {
@@ -75,10 +87,6 @@ public class User {
 
     public int getUid() {
         return uid;
-    }
-
-    public void setUid(int uid) {
-        this.uid = uid;
     }
 
     public String getNickname() {

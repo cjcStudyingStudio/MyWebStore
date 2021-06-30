@@ -64,7 +64,24 @@
       <scope>provided</scope>
     </dependency>
 
+    <!--JsonFormat注解是jackson包里面的一个注解，因此在使用的时候需要引入fasterxml maven的jar包，-->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.11.2</version>
+    </dependency>
+    <!--获取时间的架包-->
+    <dependency>
+      <groupId>joda-time</groupId>
+      <artifactId>joda-time</artifactId>
+      <version>2.3</version>
+    </dependency>
 
+    <dependency>
+      <groupId>joda-time</groupId>
+      <artifactId>joda-time</artifactId>
+      <version>2.3</version>
+    </dependency>
 
     <!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
     <dependency>

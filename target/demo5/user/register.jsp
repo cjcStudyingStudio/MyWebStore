@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -42,7 +43,15 @@
 				<h1>创建一个免费的新帐户！</h1>
 			</div>
 			<p></p>
-			<form method="post" action="${pageContext.request.contextPath }/user/UserServlet">
+
+<%--			private String username;--%>
+<%--			private String password;--%>
+<%--			private int uid;--%>
+<%--			private String nickname;--%>
+<%--			private String email;--%>
+<%--			private Date birthday;--%>
+<%--			private Date updateTime;--%>
+			<form method="post" action="${pageContext.request.contextPath }/user/register">
 				<input type="hidden" name="op" value="register" />
 				<ul class="left-form">
 					<li>
@@ -71,7 +80,7 @@
 					</li>
 					<li>
 						${msg.error.birthday }<br/>
-						<input type="text" placeholder="出生日期 2018-3-16" name="birthday" value="${msg.birthday}" size="15" />
+						<input type="date" placeholder="出生日期 2018-3-16" name="birthday" value="${msg.birthday}" size="15" />
 						<div class="clear"> </div>
 					</li>
 					<li style="height: 10px;"></li>

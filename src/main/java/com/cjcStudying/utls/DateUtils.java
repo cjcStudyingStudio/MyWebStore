@@ -8,11 +8,23 @@ import java.util.Date;
 public class DateUtils {
 
     static SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD hh:mm:ss");
+    static SimpleDateFormat dateFormat2 = new SimpleDateFormat("YYYY-MM-DD");
 
     public static Date getDate(String date){
                 Timestamp timestamp = null;
         try {
             Date date1 = dateFormat.parse(date);
+            timestamp = new Timestamp(date1.getTime());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return timestamp;
+    }
+
+    public static Date getDate2(String date){
+        Timestamp timestamp = null;
+        try {
+            Date date1 = dateFormat2.parse(date);
             timestamp = new Timestamp(date1.getTime());
         } catch (ParseException e) {
             e.printStackTrace();

@@ -22,7 +22,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="login">
       <h1>用户登录
         <span style="text-align:center;padding-top:2px;"><font color="#ff0000">${message}</font></span></h1>
-      <form method="post" action="${pageContext.request.contextPath }/user/UserServlet">
+      <form method="post" action="${pageContext.request.contextPath }/user/login">
       
       	<input type="hidden" name="op" value="login"/>
         <p><input type="text" name="username" value="${cookie.username.value}" placeholder="用户名"></p>

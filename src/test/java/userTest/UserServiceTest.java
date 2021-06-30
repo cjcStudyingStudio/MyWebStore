@@ -48,7 +48,6 @@ public class UserServiceTest {
         user.setBirthday("1994-11-2 00:00:00");
         user.setEmail("xiaoxing@123.com");
         user.setNickname("xx");
-        user.setUid(3);
         user.setUpdateTime("2021-12-2 01:02:33");
         user.setPassword("123456789");
 
@@ -64,7 +63,7 @@ public class UserServiceTest {
         user.setBirthday("1994-11-2 00:00:00");
         user.setEmail("xiaoxing@123.com");
         user.setNickname("xx");
-        user.setUid(3);
+
         user.setUpdateTime("2021-12-2 01:02:33");
         user.setPassword("123456789");
 
@@ -82,7 +81,7 @@ public class UserServiceTest {
         user.setBirthday("1995-11-2 00:00:00");
         user.setEmail("xiaoxing@123.com");
         user.setNickname("xx");
-        user.setUid(3);
+
         user.setUpdateTime("2021-12-2 01:02:33");
         user.setPassword("123456789");
         Boolean flag = userService.updateUser(user);
@@ -98,7 +97,7 @@ public class UserServiceTest {
         user.setBirthday("1995-11-2 00:00:00");
         user.setEmail("xiaoxing@123.com");
         user.setNickname("xx");
-        user.setUid(3);
+
         user.setUpdateTime("2021-12-2 01:02:33");
         user.setPassword("123456789");
         Boolean flag = userService.updateUser(user);

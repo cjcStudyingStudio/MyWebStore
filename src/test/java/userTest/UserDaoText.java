@@ -2,7 +2,6 @@ package userTest;
 
 import com.cjcStudying.dao.UserDao;
 import com.cjcStudying.domain.User;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +35,7 @@ public class UserDaoText {
 //        user.setBirthday(date);
         user.setEmail("xiaohong@123.com");
         user.setNickname("xh");
-        user.setUid(2);
+
 //        Date date1 = new Date("2021-11-2");
 //        user.setUpdateTime(date1);
         user.setPassword("123");
@@ -57,7 +56,7 @@ public class UserDaoText {
         user.setBirthday("1992-11-2 00:00:00");
         user.setEmail("xiaohong@123.com");
         user.setNickname("xxhH");
-        user.setUid(2);
+
 //        Date date2 = simpleDateFormat.parse("2021-11-2 00:00:00");
 //        Timestamp timestamp2 = new Timestamp(date2.getTime());
         user.setUpdateTime("2021-11-2 00:00:00");
