@@ -8,7 +8,10 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<!--webfonts-->
 		<!--//webfonts-->
-		<script src="js/setDate.js" type="text/javascript"></script>
+<%--		<script src="js/setDate.js" type="text/javascript"></script>--%>
+		<%
+			request.setCharacterEncoding("UTF-8");
+		%>
 		<script type="text/javascript">
             function isUserUsernameAvailable() {
                 var username = document.getElementsByName("username")[0];

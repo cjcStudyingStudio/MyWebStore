@@ -3,6 +3,7 @@ package com.cjcStudying.domain;
 import com.cjcStudying.utls.DateUtils;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.Random;
 
@@ -93,9 +94,21 @@ public class User {
         return nickname;
     }
 
+
     public void setNickname(String nickname) {
-        this.nickname = nickname;
+        String now = nickname;
+        try {
+             now = new String(nickname.getBytes("iso-8859-1"),"utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        System.out.println(now);
+        this.nickname = now;
     }
+
+//    public void setNickname(String nickname) {
+//        this.nickname = nickname;
+//    }
 
     public String getEmail() {
         return email;

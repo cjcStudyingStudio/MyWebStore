@@ -71,6 +71,7 @@ public class UserControler {
                            String nickname) throws UnsupportedEncodingException {
         response.setContentType("text/html;charset=utf-8");
         request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
         if(op.equals("register")) {
             Boolean register = userService.register(user);
             if (register) {
