@@ -1,6 +1,5 @@
 package com.cjcStudying.domain;
 
-import com.cjcStudying.utls.DateUtils;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.UnsupportedEncodingException;
@@ -39,23 +38,21 @@ public class User {
     }
 
     public void setBirthday(Date birthday) {
+//        System.out.println("date here");
         this.birthday = birthday;
     }
 
-    public void setBirthday(String birthday) {
-        Date date = DateUtils.getDate2(birthday);
-//        System.out.println("String print"+date);
-        this.birthday =date;
-    }
+
+    //无用
+//    public void setBirthday(String birthday) {
+//        System.out.println("primary =" +birthday);
+//        Date date = DateUtils.getDate2(birthday);
+////        System.out.println("String print"+date);
+//        this.birthday =date;
+//    }
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
-    }
-
-    public void setUpdateTime(String updateTime) {
-        Date date = DateUtils.getDate(updateTime);
-//        System.out.println("String print"+date);
-        this.updateTime = date;
     }
 
     public void setUid(int uid) {
@@ -102,7 +99,7 @@ public class User {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        System.out.println(now);
+//        System.out.println(now);
         this.nickname = now;
     }
 

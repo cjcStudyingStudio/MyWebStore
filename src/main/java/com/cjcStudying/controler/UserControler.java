@@ -1,17 +1,22 @@
 package com.cjcStudying.controler;
 
 import com.cjcStudying.domain.User;
+import com.cjcStudying.domain.User2;
 import com.cjcStudying.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Controller
 @RequestMapping("/user")
@@ -61,25 +66,32 @@ public class UserControler {
      * password: 123
      * birthday: 1995-08-10
      */
+    @InitBinder
+    public void init(WebDataBinder binder) {
+        binder.registerCustomEditor(Date.class,
+                new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));}
+
 
     @RequestMapping("/register")
     public String register(User user,
                            @RequestParam("op")String op,
-                           ModelAndView modelAndView,
                            HttpServletResponse response,
-                           HttpServletRequest request,
-                           String nickname) throws UnsupportedEncodingException {
+                           HttpServletRequest request) throws UnsupportedEncodingException {
         response.setContentType("text/html;charset=utf-8");
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
         if(op.equals("register")) {
             Boolean register = userService.register(user);
             if (register) {
-                modelAndView.addObject(user);
-                System.out.println(nickname);
                 return "redirect:/user/login.jsp";
             }
         }
         return "/user/register.jsp";
     }
+
+    @RequestMapping("/test")
+    public void test(User2 user2){
+        System.out.println(user2.toString());
+    }
+
 }
