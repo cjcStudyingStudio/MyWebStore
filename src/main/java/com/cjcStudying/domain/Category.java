@@ -1,10 +1,16 @@
 package com.cjcStudying.domain;
 
+import java.io.UnsupportedEncodingException;
+import java.util.Random;
+
 public class Category {
     private int cid;
     private String cname;
 
     public Category() {
+        int i = new Random().nextInt();
+        int abs = Math.abs(i);
+        this.cid = abs;
     }
 
     @Override
@@ -28,6 +34,13 @@ public class Category {
     }
 
     public void setCname(String cname) {
-        this.cname = cname;
+        String now = cname;
+        try {
+            now = new String(cname.getBytes("iso-8859-1"),"utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+//        System.out.println(now);
+        this.cname = now;
     }
 }

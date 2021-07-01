@@ -137,7 +137,7 @@
                     </c:if>
                     <c:if test="${!empty sessionScope.user }">
                         ${user.nickname }
-                    <a href="${pageContext.request.contextPath }/user/UserServlet?op=logout">退出</a></p>
+                    <a href="${pageContext.request.contextPath }/user/logout?op=logout">退出</a></p>
                 </c:if>
                 </p>
                 <p>

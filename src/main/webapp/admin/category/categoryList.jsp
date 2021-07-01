@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@page isELIgnored="false" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -23,7 +24,7 @@ body {
 
 .STYLE6 {
 	color: #000000;
-	font-size: 12;
+	font-size: 12px;
 }
 
 .STYLE10 {
@@ -50,7 +51,7 @@ body {
 </head>
 
 <body>
-	<form action="${pageContext.request.contextPath }/CategoryServlet" method="post">
+	<form action="${pageContext.request.contextPath }/category/deleteMulti" method="post">
 	<input type="hidden" name="op" value="deleteMulti"/>
 	<table width="100%" border="0" align="center" cellpadding="0"
 		cellspacing="0">

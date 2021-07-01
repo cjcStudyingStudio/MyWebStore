@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@page isELIgnored="false" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -9,7 +10,7 @@
 </head>
 <body>
 <div id="top"> </div>
-<form id="login" name="login" action="${pageContext.request.contextPath }/AdminServlet" method="post">
+<form id="login" name="login" action="${pageContext.request.contextPath }/admin/login" method="post">
   <input type="hidden" name="op" value="login"/>
   <div id="center">
     <div id="center_left"></div>

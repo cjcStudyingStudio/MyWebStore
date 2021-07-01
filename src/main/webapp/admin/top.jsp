@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@page isELIgnored="false" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -16,7 +17,7 @@ body {
 	font-size: 12px;
 	color: #000000;
 }
-.STYLE5 {font-size: 12}
+.STYLE5 {font-size: 12px}
 .STYLE7 {font-size: 12px; color: #FFFFFF; }
 .STYLE7 a{font-size: 12px; color: #FFFFFF; }
 a img {
@@ -37,7 +38,7 @@ a img {
             <td width="33" height="27"><img src="images/main_05.gif" width="33" height="27" /></td>
             <td width="248" background="images/main_06.gif"><table width="225" border="0" align="center" cellpadding="0" cellspacing="0">
               <tr>
-                <td><div align="right"><a href="${pageContext.request.contextPath }/AdminServlet?op=lgout" target="_parent"><img src="images/quit.gif" alt=" " width="69" height="17" /></a></div></td>
+                <td><div align="right"><a href="${pageContext.request.contextPath }/admin/logout?op=logout" target="_parent"><img src="images/quit.gif" alt=" " width="69" height="17" /></a></div></td>
               </tr>
             </table></td>
           </tr>

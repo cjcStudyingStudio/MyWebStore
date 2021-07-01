@@ -2,6 +2,7 @@
          pageEncoding="utf-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@page isELIgnored="false" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -104,9 +105,9 @@
 </head>
 
 <body>
-<c:if test="${empty categories }">
-    <jsp:forward page="/MainServlet"/>
-</c:if>
+<%--<c:if test="${empty categories }">--%>
+<%--    <jsp:forward page="/MainServlet"/>--%>
+<%--</c:if>--%>
 <div id="templatemo_body_wrapper">
     <div id="templatemo_wrapper">
 
@@ -139,7 +140,7 @@
                 <br style="clear: left"/>
             </div> <!-- end of ddsmoothmenu -->
             <div id="templatemo_search" onmouseleave="dispear(document.getElementById('hintContent'))">
-                <form action="${pageContext.request.contextPath }/ProductServlet" method="get">
+                <form action="${pageContext.request.contextPath }/product/findProductByPName" method="get">
                     <input type="hidden" name="op" value="findProductsByName"/>
                     <input type="text" value="${pname }" name="pname" id="keyword" title="keyword"
                            onfocus="clearText(this)" onblur="clearText(this)" onkeypress="hint()" class="txt_field"/>
@@ -192,7 +193,7 @@
             </div>
             <div id="content" class="float_r">
 
-                <span><h3 style="width:600px;heigth=40px;background: #EEEEEE; padding: 10px"> Products </h3></span>
+                <span><h3 style="width:600px;heigth:40px;background: #EEEEEE; padding: 10px"> Products </h3></span>
 
                 <c:forEach items="${page.records}" var="product" varStatus="vs">
                     <c:choose>

@@ -1,5 +1,6 @@
 ﻿<%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@page isELIgnored="false" %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -79,7 +80,7 @@ body {
     <li> <a class="head">分类管理</a>
       <ul>
         <li><a href="${pageContext.request.contextPath }/admin/category/addCategory.jsp" target="rightFrame">添加分类</a></li>
-        <li><a href="${pageContext.request.contextPath }/CategoryServlet?op=findAllCategory&num=1" target="rightFrame">查看/删除分类</a></li>
+        <li><a href="${pageContext.request.contextPath }/category/findAllCategory?op=findAllCategory&num=1" target="rightFrame">查看/删除分类</a></li>
       </ul>
     </li>
     <li> <a class="head">订单管理</a>
