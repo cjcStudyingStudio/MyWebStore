@@ -25,14 +25,14 @@ public interface UserDao {
 
 
     /**
-     * @param user
+     * @param user 根据uid（唯一） 来修改
      * @return  插入失败时候是否返回False
      */
     @Update("update user set "+
-            "username = #{user.username},nickname = #{user.nickname}," +
+            "nickname = #{user.nickname}," +
             "password = #{user.password}," +
-            "email = #{user.email},birthday = #{user.birthday}," +
-            "updatetime = #{user.updateTime} " +
+            "email = #{user.email}," +
+            "birthday = #{user.birthday}" +
             "where uid = #{user.uid}")
     Boolean updateUser(@Param("user") User user) throws DataAccessException;
 }

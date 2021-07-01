@@ -1,7 +1,6 @@
 package com.cjcStudying.controler;
 
 import com.cjcStudying.domain.User;
-import com.cjcStudying.domain.User2;
 import com.cjcStudying.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -10,10 +9,12 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -38,16 +39,12 @@ public class UserControler {
                         @RequestParam("password") String password,
                         @RequestParam("verifyCode") String verifyCode,
                         @RequestParam("remember_me") String remember_me,
-                        HttpServletResponse response){
-//    public String login( String op,
-//                         String username,
-//                        String password,
-//                         String verifyCode,
-//                        String remember_me,
-//                        HttpServletResponse response){
+                        HttpServletResponse response,
+                        HttpSession session){
         if(op.equals("login")) {
             User user = userService.login(username, password);
             if (user != null) {
+                session.setAttribute("user",user);
                 Cookie cookie = new Cookie("username", username);
                 Cookie cookie1 = new Cookie("password", password);
                 response.addCookie(cookie);
@@ -89,9 +86,41 @@ public class UserControler {
         return "/user/register.jsp";
     }
 
-    @RequestMapping("/test")
-    public void test(User2 user2){
-        System.out.println(user2.toString());
+    /**
+     * op: logout
+     */
+    @RequestMapping("/logout")
+    public String logout(@RequestParam("op")String op,
+                         HttpSession session){
+        if(op.equals("logout")){
+            session.invalidate();
+        }
+        return "redirect:/index.jsp";
     }
 
+    /**
+     * op: update
+     * uid: 1
+     * nickname: lw
+     * password: 123
+     * email: laowang@123.com
+     * birthday: 1998-10-22
+     * 注册时间不能修改uid不修改
+     */
+    @RequestMapping("/updateUser")
+    public ModelAndView modifyUser(@RequestParam("op")String op,
+                                   User user,
+                                   ModelAndView modelAndView,
+                                   HttpServletRequest request){
+        modelAndView.setViewName(request.getContextPath()+"/user/personal.jsp");
+        if(op.equals("update")){
+            Boolean flag = userService.updateUser(user);
+            if(flag){
+                modelAndView.addObject("result","修改成功");
+            }else {
+                modelAndView.addObject("result","修改失败");
+            }
+        }
+        return modelAndView;
+    }
 }

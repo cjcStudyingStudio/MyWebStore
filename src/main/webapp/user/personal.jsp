@@ -2,7 +2,8 @@
          pageEncoding="utf-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page isELIgnored="false" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -60,7 +61,7 @@
             //2.绑定回调函数
             xmlhttp.onreadystatechange = function () {
 
-                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                if (xmlhttp.readyState == 4 &amp;&amp; xmlhttp.status == 200) {
 
                     // 如果没有响应内容，隐藏 div
                     if (xmlhttp.responseText === "") {
@@ -75,9 +76,9 @@
 
                     var childdiv = "";
 
-                    for (var i = 0; i < response.length; i++) {
+                    for (var i = 0; i &lt; response.length; i++) {
                         childdiv = childdiv +
-                            "<div  onmouseover='changeBackground_over(this)' " +
+                            "&lt;div  onmouseover='changeBackground_over(this)' " +
                             "onmouseout='changeBackground_out(this)' " +
                             "onclick='fillNameValue(this)'>" + response[i] + "</div>";
                     }
@@ -87,7 +88,7 @@
                 }
             };
             //3.open
-            xmlhttp.open("GET", "${pageContext.request.contextPath}/admin/AjaxServlet?ajax=findProductsHintByName&key=" + keyword);
+            xmlhttp.open("GET", "${pageContext.request.contextPath}/admin/AjaxServlet?ajax=findProductsHintByName&amp;key=" + keyword);
             //4.send
             xmlhttp.send(null);
         }
@@ -222,7 +223,13 @@
                      email
                      birthday
                  -->
-                <form action="${pageContext.request.contextPath }/user/UserServlet" method="post">
+                <c:if test="${!empty result}">
+                    <script type="text/javascript">
+                        alert("${result}")
+                    </script>
+                </c:if>
+
+                <form action="${pageContext.request.contextPath }/user/updateUser" method="post">
                     <input type="hidden" name="op" value="update">
                     <input type="hidden" name="uid" value="${user.uid }"/>
                     用&nbsp;户&nbsp;名： ${user.username }
@@ -243,12 +250,13 @@
                         </c:otherwise>
                     </c:choose>--%>
 
+<%--                    <fmt:formatDate value="${user.birthday}" type="date" pattern="yyyy-MM-dd"/>--%>
                     <br/> <br/>
-                    出生日期：<input type="text" name="birthday" value="${user.birthday}"/>
+                    出生日期：<input type="text" name="birthday" value="<fmt:formatDate value="${user.birthday}" type="date" pattern="yyyy-MM-dd"/>"/>
                     <br/><br/>
                     <%--头像： ${user.headicon}--%>
                     <%--<br/><br/>--%>
-                    注册时间： ${user.updateTime }
+                    注册时间： <fmt:formatDate value="${user.updateTime}" type="date" pattern="yyyy-MM-dd hh:mm:ss"/>
                     <br/><br/>
                     <%-- <span>请准确填写您的信息，确保货物准确到达</span>
                     <br /><br />
