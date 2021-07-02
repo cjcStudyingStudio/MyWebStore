@@ -146,7 +146,7 @@ body {
 						<td height="20" bgcolor="#FFFFFF">
 							<div align="center" class="STYLE21">
 								<%-- <a href="${pageContext.request.contextPath }/AdminServlet?op=deleteOne&aid=${admin.aid}">删除</a> | --%> 
-								<a href="${pageContext.request.contextPath }/admin/admin/updateAdmin.jsp?aid=${admin.aid}&username=${admin.username}&password=${admin.password}">编辑</a> 
+								<a href="${pageContext.request.contextPath }/admin/admin/updateAdmin.jsp?aid=${admin.aid}&username=${admin.username}">编辑</a>
 							</div>
 						</td>
 					</tr>

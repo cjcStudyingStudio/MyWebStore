@@ -104,5 +104,32 @@ public class AdminControler {
         return request.getContextPath()+"/admin/admin/adminList.jsp";
     }
 
-
+    /**
+     * op: updateAdmin
+     * username: alibaba
+     * password: 123456
+     * password1: 123456
+     */
+    @RequestMapping("/updateAdmin")
+    public void updateAdmin(@RequestParam("op")String op,
+                         @RequestParam("password1")String password1,
+                         Admin admin,
+                         HttpServletResponse response,
+                         HttpServletRequest request){
+        if(op.equals("updateAdmin")){
+            try {
+                response.setContentType("text/html;charset=utf-8");
+                request.setCharacterEncoding("utf-8");
+                response.setCharacterEncoding("utf-8");
+                if(admin.getPassword().equals(password1)){
+                    Boolean flag = adminService.modifyAdminPassword(admin);
+                    response.getWriter().println("修改成功！");
+                }else {
+                    response.getWriter().println("修改失败！");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

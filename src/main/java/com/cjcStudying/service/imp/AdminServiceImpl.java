@@ -32,4 +32,10 @@ public class AdminServiceImpl implements AdminService {
         List<Admin> admins = adminDao.selectAllAdmin();
         return admins;
     }
+
+    @Override
+    public Boolean modifyAdminPassword(Admin admin) {
+        Boolean flag = adminDao.updateAdminPassword(admin);
+        return flag;
+    }
 }

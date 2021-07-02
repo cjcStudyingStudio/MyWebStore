@@ -4,6 +4,7 @@ import com.cjcStudying.domain.Admin;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.dao.DataAccessException;
 
 import java.util.List;
@@ -24,4 +25,9 @@ public interface AdminDao {
 
     @Select("select aid,username,password from admin")
     List<Admin> selectAllAdmin();
+
+    @Update("update admin " +
+            "set password = #{admin.password} " +
+            "where username = #{admin.username}")
+    Boolean updateAdminPassword(@Param("admin") Admin admin);
 }

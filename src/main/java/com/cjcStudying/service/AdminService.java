@@ -11,4 +11,6 @@ public interface AdminService {
     Boolean register(Admin admin);
 
     List<Admin> findAllAdmin();
+
+    Boolean modifyAdminPassword(Admin admin);
 }

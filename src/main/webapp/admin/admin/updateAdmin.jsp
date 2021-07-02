@@ -1,17 +1,18 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title></title>
 <style type="text/css"   >
-  @import url(../css/table.css)
+  @import url(../css/table.css);
 </style>
 </head>
 <body>
  
-				<form method="post" action="${pageContext.request.contextPath }/AdminServlet" >
-						<input type="hidden" name="op" value="addAdmin"/>
+				<form method="post" action="${pageContext.request.contextPath }/admin/updateAdmin" >
+						<input type="hidden" name="op" value="updateAdmin"/>
 			
  	<table width="100%" border="0" align="center" cellpadding="0"
 		cellspacing="0">
