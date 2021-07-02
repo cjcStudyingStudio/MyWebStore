@@ -2,6 +2,7 @@
     pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@page isELIgnored="false" %>%
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -109,9 +110,9 @@ ddsmoothmenu.init({
 </head>
 
 <body>
-<c:if test="${empty product }">
-		<jsp:forward page="/MainServlet"/>
-</c:if>
+<%--<c:if test="${empty product }">--%>
+<%--		<jsp:forward page="/product/mainProduct"/>--%>
+<%--</c:if>--%>
 <div id="templatemo_body_wrapper">
 <div id="templatemo_wrapper">
 

@@ -35,13 +35,14 @@
 </head>
 
 <body>
-<%--<c:if test="${empty topProducts}">--%>
-<%--    <jsp:forward page="/MainServlet"/>--%>
-<%--</c:if>--%>
+<c:if test="${empty topProducts}">
+    <jsp:forward page="${pageContext.request.contextPath}/product/mainProduct"/>
+</c:if>
 <script type="text/javascript">
     function hint() {
-
+        //首页商品搜索框
         var nameElement = document.getElementById("keyword");
+
         var div = document.getElementById("hintContent");
 
         //获取输入的信息
@@ -55,13 +56,15 @@
         //隐藏提示框
         div.innerHTML = "";
 
+
+        //AJAX
         //1.获取XMLHttpRequest对象
         var xmlhttp = new XMLHttpRequest();
 
         //2.绑定回调函数
         xmlhttp.onreadystatechange = function () {
-
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            alert(xmlhttp.readyState)
+            if (xmlhttp.readyState == 4 &amp;&amp; xmlhttp.status == 200) {
 
                 // 如果没有响应内容，隐藏 div
                 if (xmlhttp.responseText === "") {
@@ -72,19 +75,30 @@
                 var response = xmlhttp.responseText.split(",");
                 var childdiv = "";
 
-                for (var i = 0; i < response.length; i++) {
+                for (var i = 0; i &lt; response.length; i++) {
                     childdiv = childdiv +
-                        "<div  onmouseover='changeBackground_over(this)' " +
-                        "onmouseout='changeBackground_out(this)' " +
+                        //鼠标悬停--背景变白
+                        "<div  onmouseover = 'changeBackground_over(this)' " +
+                        //鼠标离开--背景变黑
+                        "onmouseout = 'changeBackground_out(this)' " +
+                        //鼠标点击--首页商品搜索框内容变成this
                         "onclick='fillNameValue(this)'>" + response[i] + "</div>";
                 }
-
+                /**
+                 * childdiv = <div  onmouseover='changeBackground_over(this)'
+                 *                  onmouseout='changeBackground_out(this)'
+                 *                  onclick='fillNameValue(this)'>
+                 *                  response[i]
+                 *            </div>
+                 */
                 div.innerHTML = childdiv;
+                //显示div
                 div.style.display = "block";
             }
         };
-        //3.open
-        xmlhttp.open("GET", "${pageContext.request.contextPath}/admin/AjaxServlet?ajax=findProductsHintByName&key=" + keyword);
+        //3.open 建立与服务器的异步连接
+        xmlhttp.open("GET", "${pageContext.request.contextPath}"+
+            "/product/ajaxFindProductsHintByName?ajax=findProductsHintByName&amp;key=" + keyword);
         //4.send
         xmlhttp.send(null);
     }
@@ -162,6 +176,7 @@
                  z-index: 99;
                  cursor: pointer;"
                      onmouseleave="dispear(this)">
+
                 </div>
             </div>
         </div> <!-- END of templatemo_menubar -->
@@ -201,7 +216,8 @@
                 <div id="slider-wrapper">
                     <div id="slider" class="nivoSlider">
                         <c:forEach items="${topProducts}" var="product">
-                            <a href="${pageContext.request.contextPath }/ProductServlet?op=findProductsByName&pname=${product.description}">
+<%--                            //首页显示Top热门商品--%>
+<%--                            <a href="${pageContext.request.contextPath }/product/findProductsByName?op=findProductsByName&pname=${product.description}">--%>
                                 <img src="${pageContext.request.contextPath }/files/${product.imgUrl }" style="width: 680px;height: 300px" alt=""
                                      title="${product.pname }"/>
                             </a>

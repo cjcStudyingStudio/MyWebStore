@@ -85,7 +85,7 @@ body {
     </li>
     <li> <a class="head">订单管理</a>
       <ul>
-        <li><a href="${pageContext.request.contextPath }/OrderServlet?op=findAllOrder&num=1" target="rightFrame">查询/修改订单</a></li>
+        <li><a href="${pageContext.request.contextPath }/order/findAllOrder?op=findAllOrder&num=1" target="rightFrame">查询/修改订单</a></li>
       </ul>
     </li>
     <li> <a class="head">系统用户管理</a>

@@ -1,20 +1,23 @@
 package com.cjcStudying.domain;
 
-import com.cjcStudying.utls.DateUtils;
-
 import java.util.Date;
+import java.util.UUID;
 
 public class Order {
     private String oid;
-    private double money;
+    private Double money;
     private String recipients;
     private String tel;
     private String address;
-    private int state;
+    private Integer state;
     private Date orderTime;
     private String uid;
 
     public Order() {
+        String s = UUID.randomUUID().toString().replace("-", "");
+        this.uid = s;
+        Date date = new Date();
+        this.orderTime = date;
     }
 
     @Override
@@ -39,11 +42,11 @@ public class Order {
         this.oid = oid;
     }
 
-    public double getMoney() {
+    public Double getMoney() {
         return money;
     }
 
-    public void setMoney(double money) {
+    public void setMoney(Double money) {
         this.money = money;
     }
 
@@ -71,11 +74,11 @@ public class Order {
         this.address = address;
     }
 
-    public int getState() {
+    public Integer getState() {
         return state;
     }
 
-    public void setState(int state) {
+    public void setState(Integer state) {
         this.state = state;
     }
 
@@ -85,11 +88,6 @@ public class Order {
 
     public void setOrderTime(Date orderTime) {
         this.orderTime = orderTime;
-    }
-
-    public void setOrderTime(String orderTime) {
-        Date date = DateUtils.getDate(orderTime);
-        this.orderTime = date;
     }
 
     public String getUid() {
