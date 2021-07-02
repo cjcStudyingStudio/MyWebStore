@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -22,7 +24,7 @@
 
 .STYLE6 {
 	color: #000000;
-	font-size: 12;
+	font-size: 12px;
 }
 
 .STYLE10 {
@@ -133,7 +135,8 @@
 						</td>
 						 
 					</tr>
-					<c:forEach items="${page.records }" var="user">
+<%--					<c:forEach items="${page.records }" var="user">--%>
+				<c:forEach items="${userList }" var="user">
 						<tr>
 							<td height="20" bgcolor="#FFFFFF">
 								<div align="center">
@@ -167,7 +170,7 @@
 						</td>
 						<td width="14%" height="20" bgcolor="d3eaef" class="STYLE6"><div
 								align="center">
-								<span class="STYLE10">${user.birthday }</span>
+								<span class="STYLE10"><fmt:formatDate value="${user.birthday}" type="date" pattern="yyyy-MM-dd"/></span>
 							</div>
 						</td>
 						<td height="20" bgcolor="#FFFFFF">
@@ -183,94 +186,94 @@
 			</td>
 		</tr>
 
-		<tr>
-			<td height="30">
-				<table width="100%" border="0" cellspacing="0" cellpadding="0">
-					<tr>
-						<td width="33%"><div align="left">
-								<span class="STYLE22">&nbsp;&nbsp;&nbsp;&nbsp;共有<strong>
-										${page.totalRecordsNum }</strong> 条记录，当前第<strong>${page.currentPageNum }</strong> 页，共 <strong>${page.totalPageNum }</strong> 页</span>
-							</div>
-						</td>
-						<td width="67%">
-							<table width="312" border="0" align="right" cellpadding="0" cellspacing="0">
-								<tr>
-									<td width="49">
-										<div align="center">
-											<span class="STYLE22">
-											<a href="${pageContext.request.contextPath }/UserServlet?op=findAllUser&num=1">首页</a>
-											</span>
-										</div>
-									</td>
-									<td width="49">
-										<div align="center">
-											<span class="STYLE22">
-											<a href="${pageContext.request.contextPath }/UserServlet?op=findAllUser&num=${page.prevPageNum}">上一页</a>
-											</span>
-										</div>
-									</td>
-									<td width="49"><span class="STYLE22">
-									    <div align="center">
-											<span class="STYLE22">
-											<a href="${pageContext.request.contextPath }/UserServlet?op=findAllUser&num=${page.nextPageNum}">下一页</a>
-											</span>
-										</div>
-									</td>
-									<td width="49">
-										<div align="center">
-											<span class="STYLE22"><a href="${pageContext.request.contextPath }/UserServlet?op=findAllUser&num=${page.totalPageNum }">尾页</a></span>
-										</div>
-									</td>
-									<td width="37" class="STYLE22"><div align="center">转到</div>
-									</td>
-									<td width="22">
-										<div align="center">
-											<input type="text" name="num" id="num" value="${page.currentPageNum }" style="width:20px; height:12px; font-size:12px; border:solid 1px #7aaebd;" />
-										</div>
-									</td>
-									<td width="22" class="STYLE22"><div align="center">页</div>
-									</td>
-									<td width="35">
-										<div align="center">
-											<span class="STYLE22"><a style="cursor:pointer;" onclick="jump()">跳转</a></span>
-										</div>
-									</td>
-								</tr>
-							</table>
-						</td>
-					</tr>
-				</table>
-			</td>
-		</tr>
+<%--		<tr>--%>
+<%--			<td height="30">--%>
+<%--				<table width="100%" border="0" cellspacing="0" cellpadding="0">--%>
+<%--					<tr>--%>
+<%--						<td width="33%"><div align="left">--%>
+<%--								<span class="STYLE22">&nbsp;&nbsp;&nbsp;&nbsp;共有<strong>--%>
+<%--										${page.totalRecordsNum }</strong> 条记录，当前第<strong>${page.currentPageNum }</strong> 页，共 <strong>${page.totalPageNum }</strong> 页</span>--%>
+<%--							</div>--%>
+<%--						</td>--%>
+<%--						<td width="67%">--%>
+<%--							<table width="312" border="0" align="right" cellpadding="0" cellspacing="0">--%>
+<%--								<tr>--%>
+<%--									<td width="49">--%>
+<%--										<div align="center">--%>
+<%--											<span class="STYLE22">--%>
+<%--											<a href="${pageContext.request.contextPath }/UserServlet?op=findAllUser&num=1">首页</a>--%>
+<%--											</span>--%>
+<%--										</div>--%>
+<%--									</td>--%>
+<%--									<td width="49">--%>
+<%--										<div align="center">--%>
+<%--											<span class="STYLE22">--%>
+<%--											<a href="${pageContext.request.contextPath }/UserServlet?op=findAllUser&num=${page.prevPageNum}">上一页</a>--%>
+<%--											</span>--%>
+<%--										</div>--%>
+<%--									</td>--%>
+<%--									<td width="49"><span class="STYLE22">--%>
+<%--									    <div align="center">--%>
+<%--											<span class="STYLE22">--%>
+<%--											<a href="${pageContext.request.contextPath }/UserServlet?op=findAllUser&num=${page.nextPageNum}">下一页</a>--%>
+<%--											</span>--%>
+<%--										</div>--%>
+<%--									</td>--%>
+<%--									<td width="49">--%>
+<%--										<div align="center">--%>
+<%--											<span class="STYLE22"><a href="${pageContext.request.contextPath }/UserServlet?op=findAllUser&num=${page.totalPageNum }">尾页</a></span>--%>
+<%--										</div>--%>
+<%--									</td>--%>
+<%--									<td width="37" class="STYLE22"><div align="center">转到</div>--%>
+<%--									</td>--%>
+<%--									<td width="22">--%>
+<%--										<div align="center">--%>
+<%--											<input type="text" name="num" id="num" value="${page.currentPageNum }" style="width:20px; height:12px; font-size:12px; border:solid 1px #7aaebd;" />--%>
+<%--										</div>--%>
+<%--									</td>--%>
+<%--									<td width="22" class="STYLE22"><div align="center">页</div>--%>
+<%--									</td>--%>
+<%--									<td width="35">--%>
+<%--										<div align="center">--%>
+<%--											<span class="STYLE22"><a style="cursor:pointer;" onclick="jump()">跳转</a></span>--%>
+<%--										</div>--%>
+<%--									</td>--%>
+<%--								</tr>--%>
+<%--							</table>--%>
+<%--						</td>--%>
+<%--					</tr>--%>
+<%--				</table>--%>
+<%--			</td>--%>
+<%--		</tr>--%>
 	</table>
 	</form>
-	<script type="text/javascript">
-		$().ready(function(){
-			$("#checkbox11").click(function(){
-				if($(this).attr("checked")){
-					$(":checkbox").attr("checked",true);
-				}else{
-					$(":checkbox").attr("checked",false);
-				}
-			})
-		})
-		function jump() {
-			
-			var num = document.getElementById("num").value;
-			if (!/^[1-9][0-9]*$/.test(num)) {
-				alert("请输入正确的页码");
-				return;
-			}
-	
-			if (num > ${page.totalPageNum}) {
-				alert("页码超出范围");
-				return;
-			}
-	
-			window.location.href = "${pageContext.request.contextPath }/UserServlet?op=findAllUser&num="
-					+ num;
-	
-		}
-	</script>
+<%--	<script type="text/javascript">--%>
+<%--		$().ready(function(){--%>
+<%--			$("#checkbox11").click(function(){--%>
+<%--				if($(this).attr("checked")){--%>
+<%--					$(":checkbox").attr("checked",true);--%>
+<%--				}else{--%>
+<%--					$(":checkbox").attr("checked",false);--%>
+<%--				}--%>
+<%--			})--%>
+<%--		})--%>
+<%--		function jump() {--%>
+<%--			--%>
+<%--			var num = document.getElementById("num").value;--%>
+<%--			if (!/^[1-9][0-9]*$/.test(num)) {--%>
+<%--				alert("请输入正确的页码");--%>
+<%--				return;--%>
+<%--			}--%>
+<%--	--%>
+<%--			if (num > ${page.totalPageNum}) {--%>
+<%--				alert("页码超出范围");--%>
+<%--				return;--%>
+<%--			}--%>
+<%--	--%>
+<%--			window.location.href = "${pageContext.request.contextPath }/UserServlet?op=findAllUser&num="--%>
+<%--					+ num;--%>
+<%--	--%>
+<%--		}--%>
+<%--	</script>--%>
 </body>
 </html>

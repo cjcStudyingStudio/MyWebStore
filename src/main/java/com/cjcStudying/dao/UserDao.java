@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.dao.DataAccessException;
 
+import java.util.List;
+
 public interface UserDao {
 
     @Select("select uid,username,nickname,password,email,birthday,updatetime " +
@@ -35,4 +37,8 @@ public interface UserDao {
             "birthday = #{user.birthday}" +
             "where uid = #{user.uid}")
     Boolean updateUser(@Param("user") User user) throws DataAccessException;
+
+    @Select("select uid,username,nickname,password,email,birthday,updatetime " +
+            "from user")
+    List<User> selectAllUser();
 }

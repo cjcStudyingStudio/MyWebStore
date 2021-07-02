@@ -97,7 +97,7 @@ body {
     <li> <a class="head">注册用户管理</a>
       <ul>
         <li><a href="${pageContext.request.contextPath }/admin/user/addUser.jsp" target="rightFrame">添加普通用户</a></li>
-        <li><a href="${pageContext.request.contextPath }/UserServlet?op=findAllUser&num=1" target="rightFrame">查看普通注册用户</a></li>
+        <li><a href="${pageContext.request.contextPath }/user/findAllUser?op=findAllUser&num=1" target="rightFrame">查看普通注册用户</a></li>
       </ul>
     </li>
     <li> <a class="head">版本信息</a>

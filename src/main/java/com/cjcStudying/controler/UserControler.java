@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +20,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -166,5 +168,33 @@ public class UserControler {
             }
         }
         return modelAndView;
+    }
+
+    /**
+     *
+     * @param op
+     * @param num
+     * @param request  返回的中文乱码未解决
+     * @return admin/user/userList.jsp
+     */
+    @RequestMapping(value = "/findAllUser" ,produces={"text/html;charset=UTF-8"})
+    public void findAllUser(@RequestParam("op")String op,
+                                    @RequestParam("num")String num,
+                                    HttpServletRequest request,
+                            HttpServletResponse response){
+        if(op.equals("findAllUser")) {
+            List<User> userList = userService.findAllUser();
+            request.setAttribute("userList", userList);
+            try {
+                response.setContentType("text/html;charset=utf-8");
+                request.setCharacterEncoding("utf-8");
+                response.setCharacterEncoding("utf-8");
+                request.getRequestDispatcher("/admin/user/userList.jsp").forward(request, response);
+            } catch (ServletException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

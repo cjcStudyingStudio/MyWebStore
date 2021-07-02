@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service("UserService")
 public class UserServiceImpl implements UserService {
 
@@ -44,5 +46,11 @@ public class UserServiceImpl implements UserService {
         }finally {
             return flag;
         }
+    }
+
+    @Override
+    public List<User> findAllUser() {
+        List<User> userList = userDao.selectAllUser();
+        return userList;
     }
 }
