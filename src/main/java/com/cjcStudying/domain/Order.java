@@ -12,6 +12,8 @@ public class Order {
     private Integer state;
     private Date orderTime;
     private String uid;
+    //还没做
+//    private Product product;
 
     public Order() {
         String s = UUID.randomUUID().toString().replace("-", "");

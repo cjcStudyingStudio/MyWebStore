@@ -1,10 +1,7 @@
 package com.cjcStudying.dao;
 
 import com.cjcStudying.domain.Order;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 import org.springframework.dao.DataAccessException;
 
 import java.util.List;
@@ -29,4 +26,7 @@ public interface OrderDao {
     @Select("select oid,money,recipients,tel,address,state,ordertime,uid " +
             "from `order` where oid = #{oid}")
     Order selectOrderByOid(@Param("oid") String oid) throws DataAccessException;
+
+    @Delete("delete from `order` where oid = #{oid}")
+    Boolean delectOrderByOid(@Param("oid")String oid);
 }

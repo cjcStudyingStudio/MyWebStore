@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page isELIgnored="false"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -23,7 +24,7 @@
 
 .STYLE6 {
 	color: #000000;
-	font-size: 12;
+	font-size: 12px;
 }
 
 .STYLE10 {
@@ -123,35 +124,66 @@
 							</div>
 						</td>
 					</tr>
-					<c:forEach items="${orderitems }" var="orderitem">
+<%--				<c:forEach items="${order}" var="orderitem">--%>
+<%--					<tr>--%>
+<%--						<td height="2" bgcolor="#FFFFFF">--%>
+<%--							<div align="center">--%>
+<%--								<input type="checkbox" name="pid" id="pid" value="${orderitem.itemid }" />--%>
+<%--							</div>--%>
+<%--						</td>--%>
+<%--						<td height="15" bgcolor="#FFFFFF" class="STYLE6">--%>
+<%--							<div align="center">--%>
+<%--									&lt;%&ndash;									<span class="STYLE19">${orderitem.itemid}</span>&ndash;%&gt;--%>
+<%--							</div>--%>
+<%--						</td>--%>
+<%--						<td height="5" bgcolor="#FFFFFF" class="STYLE19">--%>
+<%--							<div align="center">${orderitem.oid}</div>--%>
+<%--						</td>--%>
+<%--						<td height="8" bgcolor="#FFFFFF" class="STYLE19">--%>
+<%--								&lt;%&ndash;								<div align="center">${orderitem.pid}</div>&ndash;%&gt;--%>
+<%--						</td>--%>
+<%--						<td height="10" bgcolor="#FFFFFF" class="STYLE19">--%>
+<%--								&lt;%&ndash;								<div align="center">${orderitem.buynum}</div>&ndash;%&gt;--%>
+<%--						</td>--%>
+
+<%--						<td height="10" bgcolor="#FFFFFF">--%>
+<%--							<div align="center" class="STYLE21">--%>
+<%--								<a href="#">删除</a>--%>
+<%--							</div>--%>
+<%--						</td>--%>
+<%--					</tr>--%>
+<%--				</c:forEach>--%>
+
 						<tr>
 							<td height="2" bgcolor="#FFFFFF">
 								<div align="center">
-									<input type="checkbox" name="pid" id="pid" value="${orderitem.itemid }" />
+<%--									<input type="checkbox" name="pid" id="pid" value="${orderitem.itemid }" />--%>
+									<input type="checkbox" name="pid" id="pid"  />
 								</div>
 							</td>
 							<td height="15" bgcolor="#FFFFFF" class="STYLE6">
 								<div align="center">
-									<span class="STYLE19">${orderitem.itemid}</span>
+<%--									<span class="STYLE19">${orderitem.itemid}</span>--%>
 								</div>
 							</td>
 							<td height="5" bgcolor="#FFFFFF" class="STYLE19">
-								<div align="center">${orderitem.oid}</div>
+								<div align="center">${order.oid}</div>
 							</td>
 							<td height="8" bgcolor="#FFFFFF" class="STYLE19">
-								<div align="center">${orderitem.pid}</div>
+<%--								<div align="center">${orderitem.pid}</div>--%>
 							</td>
 							<td height="10" bgcolor="#FFFFFF" class="STYLE19">
-								<div align="center">${orderitem.buynum}</div>
+<%--								<div align="center">${orderitem.buynum}</div>--%>
 							</td>
-							 
+
 							<td height="10" bgcolor="#FFFFFF">
 								<div align="center" class="STYLE21">
-									<a href="#">删除</a> 
+									<a href="${pageContext.request.contextPath }/order/delOrder?op=delOrder&oid=${order.oid}">删除</a>
+
 								</div>
 							</td>
 					</tr>
-					</c:forEach>
+
 					
 				</table>
 			</td>

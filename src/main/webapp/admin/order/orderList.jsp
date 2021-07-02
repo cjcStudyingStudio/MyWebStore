@@ -184,8 +184,8 @@
 							</td>
 							<td height="10" bgcolor="#FFFFFF">
 								<div align="center" class="STYLE21">
-									<a href="${pageContext.request.contextPath }/OrderServlet?op=delOrder&oid=${order.oid}">删除</a> | 
-									<a href="${pageContext.request.contextPath }/OrderServlet?op=orderDetail&oid=${order.oid}">查看</a>
+									<a href="${pageContext.request.contextPath }/order/delOrder?op=delOrder&oid=${order.oid}">删除</a> |
+									<a href="${pageContext.request.contextPath }/order/orderDetail?op=orderDetail&oid=${order.oid}">查看</a>
 								</div>
 							</td>
 					</tr>

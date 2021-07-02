@@ -38,4 +38,10 @@ public class OrderServiceImpl implements OrderService {
         Order order = orderDao.selectOrderByOid(oid);
         return order;
     }
+
+    @Override
+    public Boolean delectOrder(String oid) {
+        Boolean flag = orderDao.delectOrderByOid(oid);
+        return flag;
+    }
 }

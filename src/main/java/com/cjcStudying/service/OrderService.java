@@ -14,4 +14,6 @@ public interface OrderService {
     List<Order> findAllOrder() throws DataAccessException;
 
     Order findOrderById(String oid) throws DataAccessException;
+
+    Boolean delectOrder(String oid);
 }
