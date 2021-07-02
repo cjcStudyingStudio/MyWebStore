@@ -15,6 +15,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -83,7 +84,50 @@ public class UserControler {
                 return "redirect:/user/login.jsp";
             }
         }
+        if(op.equals("adduser")){
+            try {
+                Boolean register = userService.register(user);
+                if (register) {
+                    response.getWriter().println("注册成功！");
+                }else {
+                    response.getWriter().println("注册成功！");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return "/admin/user/addUser.jsp";
+        }
         return "/user/register.jsp";
+    }
+
+    /**
+     * op: adduser
+     * username: alibaba
+     * nickname: 小啊
+     * password: 123
+     * email: 456798@qq.com
+     * birthday: 1995-08-10
+     */
+    @RequestMapping("/adduser")
+    public void adduser(@RequestParam("op")String op,
+                           User user,
+                           HttpServletResponse response,
+                           HttpServletRequest request) throws UnsupportedEncodingException {
+        response.setContentType("text/html;charset=utf-8");
+        request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
+        if(op.equals("adduser")){
+            try {
+                Boolean register = userService.register(user);
+                if (register) {
+                    response.getWriter().println("注册成功！");
+                }else {
+                    response.getWriter().println("注册成功！");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     /**

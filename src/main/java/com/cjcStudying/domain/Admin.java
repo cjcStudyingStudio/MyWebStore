@@ -1,11 +1,16 @@
 package com.cjcStudying.domain;
 
+import java.util.Random;
+
 public class Admin {
     private int aid;
     private String username;
     private String password;
 
     public Admin() {
+        int i = new Random().nextInt();
+        int abs = Math.abs(i);
+        this.aid = abs;
     }
 
     @Override

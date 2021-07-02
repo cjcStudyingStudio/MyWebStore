@@ -1,19 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@page isELIgnored="false" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>添加系统用户</title>
 
 <style type="text/css"   >
-  @import url(../css/table.css)
+  @import url(../css/table.css);
 </style>
 </head>
 <body>
  
 		
-			<form method="post" action="${pageContext.request.contextPath }/AdminServlet" >
+			<form method="post" action="${pageContext.request.contextPath }/admin/addAdmin" >
 						<input type="hidden" name="op" value="addAdmin"/>
 			
  	<table width="100%" border="0" align="center" cellpadding="0"
