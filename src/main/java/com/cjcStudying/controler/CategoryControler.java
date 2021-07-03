@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 @Controller
@@ -57,18 +60,19 @@ public class CategoryControler {
      * op: findAllCategory
      * num: 1
      */
-    @RequestMapping("/findAllCategory")
-    public ModelAndView findAllCategory(@RequestParam("op")String op,
-                                        @RequestParam("num")String num,
-                                        ModelAndView modelAndView,
-                                        HttpServletRequest request){
+    @RequestMapping(value = "/findAllCategory",produces={"text/html;charset=UTF-8"})
+    public String findAllCategory(@RequestParam("op")String op,
+                                  @RequestParam("num")String num,
+                                  HttpSession session,
+                                  HttpServletRequest request,
+                                  HttpServletResponse response) throws UnsupportedEncodingException {
         if(op.equals("findAllCategory")){
             List<Category> categoryList = categoryService.findAllCategory();
-                modelAndView.addObject("categoryList",categoryList);
-                modelAndView.setViewName(request.getContextPath()+"/admin/category/categoryList.jsp");
+            session.setAttribute("categoryList",categoryList);
         }
-        return modelAndView;
+        return request.getContextPath()+"/admin/category/categoryList.jsp";
     }
+
 
     /**
      * op: deleteMulti

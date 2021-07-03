@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+		 pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@page isELIgnored="false" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<% request.setCharacterEncoding("iso-8859-1"); %>
+<%@ page isELIgnored="false"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -116,19 +119,127 @@ body {
 							</div>
 						</td>
 					</tr>
-					 
-					
-				</table>
+
+
+				<c:forEach items="${categoryList}"  var="category">
+
+					<tr>
+						<td width="4%" height="20" bgcolor="#d3eaef" class="STYLE10"><div
+								align="center">
+							<input type="checkbox" name="checkbox" id="checkbox11" />
+						</div>
+						</td>
+						<td width="10%" height="20" bgcolor="#d3eaef" class="STYLE6"><div
+								align="center">
+							<span class="STYLE10">${category.cid}</span>
+						</div>
+						</td>
+						<td width="15%" height="20" bgcolor="#d3eaef" class="STYLE6"><div
+								align="center"><fmt:requestEncoding value="utf-8"/>
+							<span class="STYLE10">${category.cname}这是中文</span>
+						</div>
+						</td>
+						<td width="14%" height="20" bgcolor="#d3eaef" class="STYLE6"><div
+								align="center">
+								<span class="STYLE10">
+								<a href="${pageContext.request.contextPath }/CategoryServlet?op=toupdateCategory&cid=${category.cid}">编辑</a>|
+								<a href="${pageContext.request.contextPath }/CategoryServlet?op=deleteCategory&cid=${category.cid}">删除</a>
+								</span>
+						</div>
+						</td>
+					</tr>
+
+				</c:forEach>
+
+
+			</table>
 			</td>
 		</tr>
 
-		<tr>
-			<td height="30">
-				 
-			</td>
-		</tr>
+
+<%--		<tr>--%>
+<%--			<td height="30">--%>
+<%--				<table width="100%" border="0" cellspacing="0" cellpadding="0">--%>
+<%--					<tr>--%>
+<%--						<td width="33%"><div align="left">--%>
+<%--								<span class="STYLE22">&nbsp;&nbsp;&nbsp;&nbsp;共有<strong>--%>
+<%--									${page.totalRecordsNum }</strong> 条记录，当前第<strong>${page.currentPageNum }</strong> 页，共 <strong>${page.totalPageNum }</strong> 页</span>--%>
+<%--						</div>--%>
+<%--						</td>--%>
+<%--						<td width="67%">--%>
+<%--							<table width="312" border="0" align="right" cellpadding="0" cellspacing="0">--%>
+<%--								<tr>--%>
+<%--									<td width="49">--%>
+<%--										<div align="center">--%>
+<%--											<span class="STYLE22">--%>
+<%--											<a href="${pageContext.request.contextPath }/CategoryServlet?op=findAllCategory&num=1">首页</a>--%>
+<%--											</span>--%>
+<%--										</div>--%>
+<%--									</td>--%>
+<%--									<td width="49">--%>
+<%--										<div align="center">--%>
+<%--											<span class="STYLE22">--%>
+<%--											<a href="${pageContext.request.contextPath }/CategoryServlet?op=findAllCategory&num=${page.prevPageNum}">上一页</a>--%>
+<%--											</span>--%>
+<%--										</div>--%>
+<%--									</td>--%>
+<%--									<td width="49"><span class="STYLE22">--%>
+<%--									    <div align="center">--%>
+<%--											<span class="STYLE22">--%>
+<%--											<a href="${pageContext.request.contextPath }/CategoryServlet?op=findAllCategory&num=${page.nextPageNum}">下一页</a>--%>
+<%--											</span>--%>
+<%--										</div>--%>
+<%--									</td>--%>
+<%--									<td width="49">--%>
+<%--										<div align="center">--%>
+<%--											<span class="STYLE22"><a href="${pageContext.request.contextPath }/CategoryServlet?op=findAllCategory&num=${page.totalPageNum }">尾页</a></span>--%>
+<%--										</div>--%>
+<%--									</td>--%>
+<%--									<td width="37" class="STYLE22"><div align="center">转到</div>--%>
+<%--									</td>--%>
+<%--									<td width="22">--%>
+<%--										<div align="center">--%>
+<%--											<input type="text" name="num" id="num" value="${page.currentPageNum }" style="width:20px; height:12px; font-size:12px; border:solid 1px #7aaebd;" />--%>
+<%--										</div>--%>
+<%--									</td>--%>
+<%--									<td width="22" class="STYLE22"><div align="center">页</div>--%>
+<%--									</td>--%>
+<%--									<td width="35">--%>
+<%--										<div align="center">--%>
+<%--											<span class="STYLE22"><a style="cursor:pointer;" onclick="jump()">跳转</a></span>--%>
+<%--										</div>--%>
+<%--									</td>--%>
+<%--								</tr>--%>
+<%--							</table>--%>
+<%--						</td>--%>
+<%--					</tr>--%>
+<%--				</table>--%>
+<%--			</td>--%>
+<%--		</tr>--%>
+
 	</table>
 	</form>
+
+<%--	<script type="text/javascript">--%>
+
+<%--		function jump() {--%>
+
+<%--			var num = document.getElementById("num").value;--%>
+<%--			if (!/^[1-9][0-9]*$/.test(num)) {--%>
+<%--				alert("请输入正确的页码");--%>
+<%--				return;--%>
+<%--			}--%>
+
+<%--			if (num > ${pageInfo.totalPageNum}) {--%>
+<%--				alert("页码超出范围");--%>
+<%--				return;--%>
+<%--			}--%>
+
+<%--			window.location.href = "${pageContext.request.contextPath }/CategoryServlet?op=findAllCategory&num="--%>
+<%--					+ num;--%>
+
+<%--		}--%>
+<%--	</script>--%>
 
 </body>
 </html>
