@@ -1,4 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page isELIgnored="false"%>
+<% request.setCharacterEncoding("utf-8"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +22,7 @@ body {
 
 .STYLE6 {
 	color: #000000;
-	font-size: 12;
+	font-size: 12px;
 }
 
 .STYLE10 {
@@ -45,7 +47,7 @@ body {
 </head>
 <body>
 
-	<form method="post" action="${pageContext.request.contextPath }/CategoryServlet" >
+	<form method="post" action="${pageContext.request.contextPath }/category/updateCategory" >
 			<input type="hidden" name="op" value="updateCategory"/>	
 			<input type="hidden" name="cid" value="<%=request.getParameter("cid")%>">			
  	<table width="100%" border="0" align="center" cellpadding="0"

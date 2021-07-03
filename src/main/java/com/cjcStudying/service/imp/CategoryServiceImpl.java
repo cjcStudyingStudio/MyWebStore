@@ -37,4 +37,5 @@ public class CategoryServiceImpl implements CategoryService {
         List<Category> categories = categoryDao.findAllCategory();
         return categories;
     }
+
 }

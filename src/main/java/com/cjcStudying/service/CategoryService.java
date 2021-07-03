@@ -13,4 +13,5 @@ public interface CategoryService {
     Boolean updateCategory(Category category) throws DataAccessException;
 
     List<Category> findAllCategory() throws DataAccessException;
+
 }

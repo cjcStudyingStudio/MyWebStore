@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<% request.setCharacterEncoding("iso-8859-1"); %>
+<% request.setCharacterEncoding("utf-8"); %>
 <%@ page isELIgnored="false"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -136,13 +136,13 @@ body {
 						</td>
 						<td width="15%" height="20" bgcolor="#d3eaef" class="STYLE6"><div
 								align="center"><fmt:requestEncoding value="utf-8"/>
-							<span class="STYLE10">${category.cname}这是中文</span>
+							<span class="STYLE10">${category.cname.}这是中文</span>
 						</div>
 						</td>
 						<td width="14%" height="20" bgcolor="#d3eaef" class="STYLE6"><div
 								align="center">
 								<span class="STYLE10">
-								<a href="${pageContext.request.contextPath }/CategoryServlet?op=toupdateCategory&cid=${category.cid}">编辑</a>|
+								<a href="${pageContext.request.contextPath }/admin/category/updateCategory.jsp?cname=${category.cname}&cid=${category.cid}">编辑</a>|
 								<a href="${pageContext.request.contextPath }/CategoryServlet?op=deleteCategory&cid=${category.cid}">删除</a>
 								</span>
 						</div>

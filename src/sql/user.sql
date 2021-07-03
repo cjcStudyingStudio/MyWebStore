@@ -71,3 +71,9 @@ CREATE TABLE shoppingitem(
                              FOREIGN KEY (pid) REFERENCES `product`(pid)
 )ENGINE = INNODB charset = utf8;
 
+create table picture(
+                        picid VARCHAR(32) PRIMARY KEY,
+                        pict BLOB ,
+                        pid VARCHAR(100) ,
+                        FOREIGN KEY (pid) REFERENCES product(pid)
+)Engine= InnoDB Charset= utf8;

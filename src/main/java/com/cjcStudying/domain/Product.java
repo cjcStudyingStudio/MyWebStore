@@ -1,5 +1,9 @@
 package com.cjcStudying.domain;
 
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.UUID;
+
 public class Product {
     private String pid;
     private String pname;
@@ -10,8 +14,11 @@ public class Product {
     private String imgUrl;
     private String desc;
     private Category category;
+    private MultipartFile imgurl;
 
     public Product() {
+        String s = UUID.randomUUID().toString().replace("-", "");
+        this.pid = s;
     }
 
     @Override
@@ -26,7 +33,16 @@ public class Product {
                 ", imgUrl='" + imgUrl + '\'' +
                 ", desc='" + desc + '\'' +
                 ", category=" + category +
+                ", imgurl=" + imgurl +
                 '}';
+    }
+
+    public MultipartFile getImgurl() {
+        return imgurl;
+    }
+
+    public void setImgurl(MultipartFile imgurl) {
+        this.imgurl = imgurl;
     }
 
     public Category getCategory() {
@@ -50,6 +66,8 @@ public class Product {
     }
 
     public void setPname(String pname) {
+//        String name = NameUtils.encodingName(pname);
+//        this.pname = name;
         this.pname = pname;
     }
 
@@ -98,6 +116,8 @@ public class Product {
     }
 
     public void setDesc(String desc) {
+//        String name = NameUtils.encodingName(desc);
+//        this.desc = name;
         this.desc = desc;
     }
 }

@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%@ page isELIgnored="false" %>
+		<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<% request.setCharacterEncoding("utf-8");%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -22,7 +24,7 @@ body {
 
 .STYLE6 {
 	color: #000000;
-	font-size: 12;
+	font-size: 12px;
 }
 
 .STYLE10 {
@@ -46,8 +48,10 @@ body {
 </style>
 </head>
 
+
+
 <body>
-	<form method="post" action="${pageContext.request.contextPath }/AddProductServlet" enctype="multipart/form-data">
+	<form method="post" action="${pageContext.request.contextPath }/product/addProduct" enctype="multipart/form-data">
  	<table width="100%" border="0" align="center" cellpadding="0"
 		cellspacing="0">
 		<tr>
@@ -103,7 +107,7 @@ body {
 						<td width="80%" height="20" bgcolor="d3eaef" class="STYLE6"><div
 								align="left">
  							<select name="cid" id="st" onchange="change()">
-								<c:forEach items="${categories }" var="category">
+								<c:forEach items="${categoryList }" var="category">
 									<option value="${category.cid}">${category.cname}</option>
 								</c:forEach>	
 							</select>
@@ -114,26 +118,27 @@ body {
 						 
 					</tr>
 				 
-				 <tr>
-						<td width="4%" height="20" bgcolor="d3eaef" class="STYLE10"><div
-								align="center">
-								<input type="checkbox" name="checkbox" id="checkbox11" />
-							</div>
-						</td>
-						<td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div
-								align="center">
-								<span class="STYLE10">商品号</span>
-							</div>
-						</td>
-						<td width="80%" height="20" bgcolor="d3eaef" class="STYLE6"><div
-								align="left">
- 							 
-						     <input type="text" name="pid"/>
-						 
-							</div>
-						</td>
-						 
-					</tr>
+<%--				 <tr>--%>
+<%--						<td width="4%" height="20" bgcolor="d3eaef" class="STYLE10"><div--%>
+<%--								align="center">--%>
+<%--								<input type="checkbox" name="checkbox" id="checkbox11" />--%>
+<%--							</div>--%>
+<%--						</td>--%>
+<%--						<td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div--%>
+<%--								align="center">--%>
+<%--								<span class="STYLE10">商品号</span>--%>
+<%--							</div>--%>
+<%--						</td>--%>
+<%--						<td width="80%" height="20" bgcolor="d3eaef" class="STYLE6"><div--%>
+<%--								align="left">--%>
+
+<%--&lt;%&ndash;							商品号应该自动生成&ndash;%&gt;--%>
+<%--						     <input type="text" name="pid"/>--%>
+<%--						 --%>
+<%--							</div>--%>
+<%--						</td>--%>
+<%--						 --%>
+<%--					</tr>--%>
 					
 					
 					
@@ -151,7 +156,7 @@ body {
 						<td width="80%" height="20" bgcolor="d3eaef" class="STYLE6"><div
 								align="left">
  							 
-						<input type="text"  name="pnum"/>
+						<input type="text"  name="pNum"/>
 						 
 							</div>
 						</td>
@@ -196,7 +201,7 @@ body {
 						<td width="80%" height="20" bgcolor="d3eaef" class="STYLE6"><div
 								align="left">
  							 
-						<input type="text" name="estoreprice"/><br>
+						<input type="text" name="eStorePrice"/><br>
 						 
 							</div>
 						</td>
@@ -218,7 +223,7 @@ body {
 						<td width="80%" height="20" bgcolor="d3eaef" class="STYLE6"><div
 								align="left">
  							 
-						<input type="text" name="markprice"/><br>
+						<input type="text" name="markPrice"/><br>
 						 
 							</div>
 						</td>
@@ -239,7 +244,7 @@ body {
 						<td width="80%" height="20" bgcolor="d3eaef" class="STYLE6"><div
 								align="left">
  							 
- 							<input type="file" name="imgurl"/><br>						 
+ 							<input type="file" name="imgurl"/><br>
 							</div>
 						</td>
 						 
@@ -259,7 +264,7 @@ body {
 						<td width="80%" height="20" bgcolor="d3eaef" class="STYLE6"><div
 								align="left">
  							 
-						     <textarea name="description" cols="50" rows="5"></textarea>
+						     <textarea name="desc" cols="50" rows="5"></textarea>
 						 
 							</div>
 						</td>
@@ -288,6 +293,10 @@ body {
 		</tr>
 	</table>
 	</form>
-	 
+	<script type="text/javascript">
+		if(<%=request.getParameter("addProductResult")!=null%>){
+			alert("<%=request.getParameter("addProductResult")%>")
+		}
+	</script>
 </body>
 </html>
