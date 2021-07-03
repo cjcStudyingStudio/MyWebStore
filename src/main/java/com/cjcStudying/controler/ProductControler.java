@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletException;
@@ -118,9 +117,7 @@ public class ProductControler {
     @RequestMapping("/addProduct")
     public ModelAndView addCategory(Product product,
                                     ModelAndView modelAndView,
-                                    MultipartFile imgurl,
-                                    HttpServletRequest request,
-                                    HttpServletResponse response) throws IOException {
+                                    HttpServletRequest request) throws IOException {
         modelAndView.setViewName("redirect:"+request.getContextPath()+"/admin/product/addProduct.jsp");
 //
 //        System.out.println("RealName = "+ NameUtils.encodingName(imgurl.getOriginalFilename()));
@@ -177,4 +174,52 @@ public class ProductControler {
             }
         return modelAndView;
     }
+
+    /**
+     * op: findAllProduct
+     * num: 1
+     */
+    @RequestMapping("/findAllProduct")
+    public String findAllProduct(@RequestParam("op")String op,
+                                 @RequestParam("num")String num,
+                                 HttpServletRequest request) throws IOException {
+        List<Product> productList = productService.findAllProduct();
+        request.setAttribute("productList",productList);
+        return "forward:"+request.getContextPath()+"/admin/product/productList.jsp";
+    }
+
+    /**
+     * op: deleteOne
+     * pid: 0100a498a8974247856351544a137cc2
+     */
+    @RequestMapping("/deleteOne")
+    public ModelAndView deleteOne(@RequestParam("op")String op,
+                                  @RequestParam("pid")String pid,
+                                   ModelAndView modelAndView,
+                                   HttpServletRequest request){
+        modelAndView.setViewName("forward:"+request.getContextPath()+"/admin/product/productList.jsp");
+        if(op.equals("deleteOne")){
+            Boolean flag = productService.deleteProductByPid(pid);
+            //同时需要删除本地图片为完成！
+            if(flag){
+                modelAndView.addObject("deleteProductResult","商品删除成功");
+            }else {
+                modelAndView.addObject("deleteProductResult","商品删除失败");
+            }
+            List<Product> productList = productService.findAllProduct();
+            request.setAttribute("productList",productList);
+        }
+        return modelAndView;
+    }
+
+    /**
+     * num: 1
+     * op: multiConditionSearch
+     * pid: 321412412
+     * cid: 1376582235
+     * pname: 天下第一
+     * minprice: 4214
+     * maxprice: 5534
+     * search: 查询
+     */
 }

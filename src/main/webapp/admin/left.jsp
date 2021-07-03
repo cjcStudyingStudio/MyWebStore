@@ -74,7 +74,7 @@ body {
       <ul>
         <li><a href="${pageContext.request.contextPath}/category/findAllCategory?op=findAllCategoryToProducts" target="rightFrame">添加商品</a></li>
         <li><a href="${pageContext.request.contextPath}/product/findAllProduct?op=findAllProduct&num=1" target="rightFrame">查看/修改商品</a></li>
-        <li><a href="${pageContext.request.contextPath}/admin/product/searchProduct.jsp" target="rightFrame">搜索商品</a></li>
+        <li><a href="${pageContext.request.contextPath}/category/findAllCategory?op=searchProduct" target="rightFrame">搜索商品</a></li>
       </ul>
     </li>
     <li> <a class="head">分类管理</a>

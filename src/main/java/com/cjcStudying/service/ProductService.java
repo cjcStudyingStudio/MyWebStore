@@ -15,4 +15,6 @@ public interface ProductService {
     Product findProduct(String name) throws DataAccessException;
 
     List<Product> findAllProduct() throws DataAccessException;
+
+    Boolean deleteProductByPid(String pid);
 }

@@ -44,4 +44,10 @@ public class ProductServiceImpl implements ProductService {
         List<Product> products = productDao.selectAllProduct();
         return products;
     }
+
+    @Override
+    public Boolean deleteProductByPid(String pid) {
+        Boolean flag = productDao.deleteProductByPid(pid);
+        return flag;
+    }
 }

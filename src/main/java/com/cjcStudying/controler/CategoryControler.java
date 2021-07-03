@@ -61,7 +61,7 @@ public class CategoryControler {
     }
 
     /**
-     * op: findAllCategory  findAllCategoryToProducts
+     * op: findAllCategory  findAllCategoryToProducts searchProduct
      * num: 1
      */
     @RequestMapping(value = "/findAllCategory",produces={"text/html;charset=UTF-8"})
@@ -70,12 +70,15 @@ public class CategoryControler {
                                   HttpSession session,
                                   HttpServletRequest request,
                                   HttpServletResponse response) throws UnsupportedEncodingException {
-        if(op.equals("findAllCategory")||op.equals("findAllCategoryToProducts")){
+        if(op.equals("findAllCategory")||op.equals("findAllCategoryToProducts")||op.equals("searchProduct")){
             List<Category> categoryList = categoryService.findAllCategory();
             session.setAttribute("categoryList",categoryList);
         }
         if(op.equals("findAllCategoryToProducts")){
             return request.getContextPath()+"/admin/product/addProduct.jsp";
+        }
+        if(op.equals("searchProduct")){
+            return request.getContextPath()+"/admin/product/searchProduct.jsp";
         }
         return request.getContextPath()+"/admin/category/categoryList.jsp";
 

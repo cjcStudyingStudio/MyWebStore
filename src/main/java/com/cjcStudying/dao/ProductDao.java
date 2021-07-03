@@ -31,4 +31,7 @@ public interface ProductDao {
     @Select("select pid , pname, estoreprice, markprice, pnum, cid, imgurl, `desc` " +
             "from `product`")
     List<Product> selectAllProduct() throws DataAccessException;
+
+    @Delete("delete from `product` where pid = #{pid}")
+    Boolean deleteProductByPid(@Param("pid") String pid);
 }

@@ -136,7 +136,7 @@ body {
 						</td>
 						<td width="15%" height="20" bgcolor="#d3eaef" class="STYLE6"><div
 								align="center"><fmt:requestEncoding value="utf-8"/>
-							<span class="STYLE10">${category.cname.}这是中文</span>
+							<span class="STYLE10">${category.cname}这是中文</span>
 						</div>
 						</td>
 						<td width="14%" height="20" bgcolor="#d3eaef" class="STYLE6"><div

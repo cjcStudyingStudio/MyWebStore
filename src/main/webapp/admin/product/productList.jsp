@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<% request.setCharacterEncoding("utf-8");%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -50,6 +51,12 @@ body {
 </head>
 
 <body>
+
+<script type="text/javascript">
+	if(<%=request.getParameter("deleteProductResult")!=null%>){
+		alert("<%=request.getParameter("deleteProductResult")%>")
+	}
+</script>
 	<form action="${pageContext.request.contextPath }/ProductServlet" method="post">
 	<input type="hidden" name="op" value="deleteMulti"/>
 	<table width="100%" border="0" align="center" cellpadding="0"
@@ -135,7 +142,7 @@ body {
 							</div>
 						</td>
 					</tr>
-					<c:forEach items="${page.records }" var="product">
+					<c:forEach items="${productList }" var="product">
 						<tr>
 							<td height="20" bgcolor="#FFFFFF">
 								<div align="center">
@@ -151,20 +158,20 @@ body {
 								<div align="center">${product.pname}</div>
 							</td>
 							<td height="20" bgcolor="#FFFFFF" class="STYLE19">
-								<div align="center">${product.estoreprice}</div>
+								<div align="center">${product.eStorePrice}</div>
 							</td>
 							<td height="20" bgcolor="#FFFFFF" class="STYLE19">
-								<div align="center">${product.markprice}</div>
+								<div align="center">${product.markPrice}</div>
 							</td>
 							<td height="20" bgcolor="#FFFFFF" class="STYLE19">
-								<div align="center">${product.pnum}</div>
+								<div align="center">${product.pNum}</div>
 							</td>
 							<td height="20" bgcolor="#FFFFFF" class="STYLE19">
 								<div align="center">${product.category.cname}</div>
 							</td>
 							<td height="20" bgcolor="#FFFFFF">
 								<div align="center" class="STYLE21">
-									<a href="${pageContext.request.contextPath }/ProductServlet?op=deleteOne&pid=${product.pid}">删除</a> | 
+									<a href="${pageContext.request.contextPath }/product/deleteOne?op=deleteOne&pid=${product.pid}">删除</a> |
 									<a href="${pageContext.request.contextPath }/CategoryServlet?op=findCategoryByUpdate&pid=${product.pid}">编辑</a>
 								</div>
 							</td>
@@ -174,6 +181,8 @@ body {
 				</table>
 			</td>
 		</tr>
+
+
 
 		<tr>
 			<td height="30">
