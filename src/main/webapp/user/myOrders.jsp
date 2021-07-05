@@ -126,13 +126,13 @@ ddsmoothmenu.init({
 	        </c:if>
 	        <c:if test="${!empty sessionScope.user }">
 	        	${user.nickname }
-	        	<a href="${pageContext.request.contextPath }/user/UserServlet?op=logout">退出</a></p>
+	        	<a href="${pageContext.request.contextPath }/user/logout?op=logout">退出</a></p>
 	        </c:if>
 	        </p>
 	        <p>
-		        <c:if test="${!empty user }">
-		        	<a href="${pageContext.request.contextPath }/user/OrderServlet?op=myoid">我的订单</a> |
-		        </c:if>
+<%--		        <c:if test="${!empty user }">--%>
+<%--		        	<a href="${pageContext.request.contextPath }/user/OrderServlet?op=myoid">我的订单</a> |--%>
+<%--		        </c:if>--%>
 	        </p>
 		</div>
         <div class="cleaner"></div>
@@ -141,12 +141,12 @@ ddsmoothmenu.init({
     <div id="templatemo_menubar" style="position: relative;">
     	<div id="top_nav" class="ddsmoothmenu">
             <ul>
-                <li><a href="${pageContext.request.contextPath }/MainServlet" class="selected">主页</a></li>
+                <li><a href="${pageContext.request.contextPath }/mainProduct" class="selected">主页</a></li>
             </ul>
             <br style="clear: left" />
         </div> <!-- end of ddsmoothmenu -->
         <div id="templatemo_search" onmouseleave="dispear(document.getElementById('hintContent'))">
-            <form action="${pageContext.request.contextPath }/ProductServlet" method="get">
+            <form action="${pageContext.request.contextPath }/findProductsByName" method="get">
               <input type="hidden" name="op" value="findProductsByName"/>
               <input type="text" value="${pname }" name="pname" id="keyword" title="keyword"
 					 onfocus="clearText(this)" onblur="clearText(this)" onkeypress="hint()" class="txt_field" />
@@ -177,18 +177,18 @@ ddsmoothmenu.init({
                 			<c:if test="${vs.index !=0}">
                 				<c:if test="${vs.index != fn:length(categories)-1 }">
                 					<li>
-                						<a href="${pageContext.request.contextPath }/ProductServlet?op=findProductByCid&cid=${category.cid}">${category.cname}</a>
+                						<a href="${pageContext.request.contextPath }/findProductByCid?op=findProductByCid&cid=${category.cid}">${category.cname}</a>
                 					</li>
                 				</c:if>
                 			</c:if>
                 			<c:if test="${vs.index==0 }">
                 				<li class="first">
-                					<a href="${pageContext.request.contextPath }/ProductServlet?op=findProductByCid&cid=${category.cid}">${category.cname}</a>
+                					<a href="${pageContext.request.contextPath }/findProductByCid?op=findProductByCid&cid=${category.cid}">${category.cname}</a>
                 				</li>
                 			</c:if>
                 			<c:if test="${vs.index == fn:length(categories)-1 }">
                 				<li class="last">
-                					<a href="${pageContext.request.contextPath }/ProductServlet?op=byfindProductByCidCid&cid=${category.cid}">${category.cname}</a>
+                					<a href="${pageContext.request.contextPath }/findProductByCid?op=byfindProductByCidCid&cid=${category.cid}">${category.cname}</a>
                 				</li>
                 			</c:if>
                 		</c:forEach>
@@ -221,7 +221,7 @@ ddsmoothmenu.init({
 					<c:if test="${order.state == 3}">已发货</c:if>
 				</td>
 				<td>
-					<c:if test="${order.state==1}"><a href="${pageContext.request.contextPath}/user/OrderServlet?op=cancelOrder&oid=${order.oid}&state=0">取消订单</a>
+					<c:if test="${order.state==1}"><a href="${pageContext.request.contextPath}/order/cancelOrder?op=cancelOrder&oid=${order.oid}&state=0">取消订单</a>
 <%--
 					<c:if test="${order.state==1}"><a href="${pageContext.request.contextPath}/user/OrderServlet?op=cancelOrder&oid=${order.oid}&state=0">支付订单</a>
 --%>

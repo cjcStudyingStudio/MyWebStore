@@ -44,4 +44,10 @@ public class OrderServiceImpl implements OrderService {
         Boolean flag = orderDao.delectOrderByOid(oid);
         return flag;
     }
+
+    @Override
+    public List<Order> findOrderByUid(String uid) {
+        List<Order> orderList = orderDao.selectOrderByUid(uid);
+        return orderList;
+    }
 }

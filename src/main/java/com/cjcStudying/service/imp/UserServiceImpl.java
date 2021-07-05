@@ -1,11 +1,14 @@
 package com.cjcStudying.service.imp;
 
 import com.cjcStudying.dao.UserDao;
+import com.cjcStudying.domain.ShoppingCart;
 import com.cjcStudying.domain.User;
+import com.cjcStudying.service.ShoppingCartService;
 import com.cjcStudying.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -14,6 +17,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private ShoppingCartService shoppingCartService;
 
     public User login(String username, String password) throws DataAccessException{
         User user = null;
@@ -26,14 +32,19 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Transactional
     public Boolean register(User user) throws DataAccessException{
         Boolean flag = false;
+        Boolean flag2 = false;
         try {
-                flag = userDao.saveUser(user);
+            flag = userDao.saveUser(user);
+            ShoppingCart shoppingCart = new ShoppingCart();
+            shoppingCart.setUid(user.getUid());
+            flag2 = shoppingCartService.addShoppingCart(shoppingCart);
         }catch (DataAccessException e){
             throw e;
         }finally {
-            return flag;
+            return flag&flag2;
         }
     }
 

@@ -41,17 +41,19 @@ public class UserControler {
                         @RequestParam("username") String username,
                         @RequestParam("password") String password,
                         @RequestParam("verifyCode") String verifyCode,
-                        @RequestParam("remember_me") String remember_me,
+                        String remember_me,
                         HttpServletResponse response,
                         HttpSession session){
         if(op.equals("login")) {
             User user = userService.login(username, password);
             if (user != null) {
                 session.setAttribute("user",user);
-                Cookie cookie = new Cookie("username", username);
-                Cookie cookie1 = new Cookie("password", password);
-                response.addCookie(cookie);
-                response.addCookie(cookie1);
+                if(remember_me.equals("on")){
+                    Cookie cookie = new Cookie("username", username);
+                    Cookie cookie1 = new Cookie("password", password);
+                    response.addCookie(cookie);
+                    response.addCookie(cookie1);
+                }
                 return "redirect:/index.jsp";
             }
         }

@@ -249,7 +249,9 @@
                             <a href="javascript:login()" class="addtocart"></a>
                         </c:if>
                         <c:if test="${!empty user }">
-                            <a href="javascript:addCart(${product.pid },${user.uid})" class="addtocart"></a>
+                            <a href="${pageContext.request.contextPath }/shoppingCart/addToShoppingCart?op=addCartFromIndex&pid=${product.pid }&uid=${user.uid}"
+                               class="addtocart"></a>
+<%--                            <a href="javascript:addCart(${product.pid },${user.uid})" class="addtocart"></a>--%>
                         </c:if>
                         <a href="${pageContext.request.contextPath }/findProductByPid?op=findProductByPid&pid=${product.pid}"
                            class="detail"></a>
@@ -274,7 +276,7 @@
     }
 
     function addCart(pid, uid) {
-        window.location.href = "${pageContext.request.contextPath}/user/CartServlet?op=addCart&pid=" + pid + "&uid=" + uid;
+        window.location.href = "${pageContext.request.contextPath}/shoppingCart/addToShoppingCart?op=addCart&pid=" + pid + "&uid=" + uid;
     }
 </script>
 </body>

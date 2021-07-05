@@ -29,4 +29,8 @@ public interface OrderDao {
 
     @Delete("delete from `order` where oid = #{oid}")
     Boolean delectOrderByOid(@Param("oid")String oid);
+
+    @Select("select oid,money,recipients,tel,address,state,ordertime,uid " +
+            "from `order` where uid = #{uid}")
+    List<Order> selectOrderByUid(@Param("uid") String uid);
 }

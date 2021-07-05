@@ -130,7 +130,7 @@
                     <c:if test="${!empty user }">
                         <a href="${pageContext.request.contextPath }/user/personal.jsp">我的个人中心</a> |
                     </c:if>
-                    <a href="${pageContext.request.contextPath }/user/CartServlet?op=findCart">购物车</a> |
+                    <a href="${pageContext.request.contextPath }/findShoppingCart?op=findCart">购物车</a> |
                     <c:if test="${user == null }">
                         <a href="${pageContext.request.contextPath }/user/login.jsp">登录</a> |
                         <a href="${pageContext.request.contextPath }/user/register.jsp">注册</a>
@@ -142,7 +142,7 @@
                 </p>
                 <p>
                     <c:if test="${!empty user }">
-                        <a href="${pageContext.request.contextPath }/user/OrderServlet?op=myoid">我的订单</a> |
+                        <a href="${pageContext.request.contextPath }/order/myOrder?op=myoid&uid=${user.uid}">我的订单</a> |
                     </c:if>
                 </p>
             </div>
@@ -152,12 +152,12 @@
         <div id="templatemo_menubar" style="position: relative;">
             <div id="top_nav" class="ddsmoothmenu">
                 <ul>
-                    <li><a href="${pageContext.request.contextPath }/MainServlet" class="selected">主页</a></li>
+                    <li><a href="${pageContext.request.contextPath }/mainProduct" class="selected">主页</a></li>
                 </ul>
                 <br style="clear: left"/>
             </div> <!-- end of ddsmoothmenu -->
             <div id="templatemo_search" onmouseleave="dispear(document.getElementById('hintContent'))">
-                <form action="${pageContext.request.contextPath }/ProductServlet" method="get">
+                <form action="${pageContext.request.contextPath }/findProductsByName" method="get">
                     <input type="hidden" name="op" value="findProductsByName"/>
                     <input type="text" value="${pname }" name="pname" id="keyword" title="keyword"
                            onfocus="clearText(this)" onblur="clearText(this)" onkeypress="hint()" class="txt_field"/>
@@ -189,18 +189,18 @@
                                 <c:if test="${vs.index !=0}">
                                     <c:if test="${vs.index != fn:length(categories)-1 }">
                                         <li>
-                                            <a href="${pageContext.request.contextPath }/ProductServlet?op=findProductByCid&cid=${category.cid}">${category.cname}</a>
+                                            <a href="${pageContext.request.contextPath }/findProductByCid?op=findProductByCid&cid=${category.cid}">${category.cname}</a>
                                         </li>
                                     </c:if>
                                 </c:if>
                                 <c:if test="${vs.index==0 }">
                                     <li class="first">
-                                        <a href="${pageContext.request.contextPath }/ProductServlet?op=findProductByCid&cid=${category.cid}">${category.cname}</a>
+                                        <a href="${pageContext.request.contextPath }/findProductByCid?op=findProductByCid&cid=${category.cid}">${category.cname}</a>
                                     </li>
                                 </c:if>
                                 <c:if test="${vs.index == fn:length(categories)-1 }">
                                     <li class="last">
-                                        <a href="${pageContext.request.contextPath }/ProductServlet?op=findProductByCid&cid=${category.cid}">${category.cname}</a>
+                                        <a href="${pageContext.request.contextPath }/findProductByCid?op=findProductByCid&cid=${category.cid}">${category.cname}</a>
                                     </li>
                                 </c:if>
                             </c:forEach>

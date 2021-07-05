@@ -77,4 +77,42 @@ public class OrderControler {
         return request.getContextPath()+"/admin/order/orderDetails.jsp";
     }
 
+    /**
+     * op: myoid
+     * uid: 1
+     */
+    @RequestMapping("/myOrder")
+    public String myOrder(@RequestParam("op")String op,
+                          @RequestParam("uid")String uid,
+                          HttpServletRequest request){
+        if(op.equals("myoid")){
+            List<Order> orderList = orderService.findOrderByUid(uid);
+            request.setAttribute("orders",orderList);
+        }
+        return "forward:"+request.getContextPath()+"/user/myOrders.jsp";
+    }
+
+    /**
+     * op: cancelOrder
+     * oid: 1232458
+     * state: 0
+     */
+    @RequestMapping("/cancelOrder")
+    public void cancelOrder(@RequestParam("op")String op,
+                            @RequestParam("oid")String oid,
+                              @RequestParam("state")Integer state,
+                          HttpServletResponse response){
+        if(op.equals("cancelOrder")){
+            Boolean flag = orderService.updateOrderState(oid, state);
+            try {
+                if(flag){
+                    response.getWriter().println("订单已取消！");
+                }else {
+                    response.getWriter().println("订单未取消，请稍后再试！");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

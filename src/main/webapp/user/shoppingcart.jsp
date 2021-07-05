@@ -124,7 +124,7 @@ ddsmoothmenu.init({
 	        </c:if>
 	        <c:if test="${!empty sessionScope.user }">
 	        	${user.nickname }
-	        	<a href="${pageContext.request.contextPath }/user/UserServlet?op=logout">退出</a></p>
+	        	<a href="${pageContext.request.contextPath }/user/logout?op=logout">退出</a></p>
 	        </c:if>
 	        </p>
 	        <p>
@@ -139,12 +139,12 @@ ddsmoothmenu.init({
     <div id="templatemo_menubar" style="position: relative;">
     	<div id="top_nav" class="ddsmoothmenu">
             <ul>
-                <li><a href="${pageContext.request.contextPath }/MainServlet" class="selected">主页</a></li>
+                <li><a href="${pageContext.request.contextPath }/mainProduct" class="selected">主页</a></li>
             </ul>
             <br style="clear: left" />
         </div> <!-- end of ddsmoothmenu -->
         <div id="templatemo_search" onmouseleave="dispear(document.getElementById('hintContent'))">
-            <form action="${pageContext.request.contextPath }/ProductServlet" method="get">
+            <form action="${pageContext.request.contextPath }/findProductsByName" method="get">
               <input type="hidden" name="op" value="findProductsByName"/>
               <input type="text" value="${pname }" name="pname" id="keyword" title="keyword"
 					 onfocus="clearText(this)" onblur="clearText(this)" onkeypress="hint()" class="txt_field" />
@@ -175,18 +175,18 @@ ddsmoothmenu.init({
                 			<c:if test="${vs.index !=0}">
                 				<c:if test="${vs.index != fn:length(categories)-1 }">
                 					<li>
-                						<a href="${pageContext.request.contextPath }/ProductServlet?op=findProductByCid&cid=${category.cid}">${category.cname}</a>
+                						<a href="${pageContext.request.contextPath }/findProductByCid?op=findProductByCid&cid=${category.cid}">${category.cname}</a>
                 					</li>
                 				</c:if>
                 			</c:if>
                 			<c:if test="${vs.index==0 }">
                 				<li class="first">
-                					<a href="${pageContext.request.contextPath }/ProductServlet?op=findProductByCid&cid=${category.cid}">${category.cname}</a>
+                					<a href="${pageContext.request.contextPath }/findProductByCid?op=findProductByCid&cid=${category.cid}">${category.cname}</a>
                 				</li>
                 			</c:if>
                 			<c:if test="${vs.index == fn:length(categories)-1 }">
                 				<li class="last">
-                					<a href="${pageContext.request.contextPath }/ProductServlet?op=findProductByCid&cid=${category.cid}">${category.cname}</a>
+                					<a href="${pageContext.request.contextPath }/findProductByCid?op=findProductByCid&cid=${category.cid}">${category.cname}</a>
                 				</li>
                 			</c:if>
                 		</c:forEach>
@@ -212,12 +212,12 @@ ddsmoothmenu.init({
 		                      <c:forEach items="${shoppingCart.shoppingItems}" var="item">
 									<tr>
 			                        	<td>
-											<a href="${pageContext.request.contextPath }/ProductServlet?op=findProductByPid&pid=${item.pid}">
-											<img src="${pageContext.request.contextPath }/files/${item.product.imgUrl}" style="width: 100px;height: 150px" alt="" /></a></td>
+											<a href="${pageContext.request.contextPath }/findProductByPid?op=findProductByPid&pid=${item.pid}">
+											<img src="${pageContext.request.contextPath }${item.product.imgUrl}" style="width: 100px;height: 150px" alt="" /></a></td>
 			                        	<td>${item.product.pname }</td> 
 			                            <td align="center"><font style="width: 20px; text-align: right">${item.snum}</font> </td>
-			                            <td align="right">${item.product.estorePrice } </td>
-			                            <td align="right">${item.product.estorePrice * item.snum} </td>
+			                            <td align="right">${item.product.eStorePrice } </td>
+			                            <td align="right">${item.product.eStorePrice * item.snum} </td>
 			                            <td align="center"> 
 			                            	<a href="${pageContext.request.contextPath }/user/CartServlet?op=delItem&uid=${user.uid}&itemId=${item.itemId}">
 			                            		<!-- <img src="images/remove_x.gif" alt="remove" /> <br />-->
