@@ -172,18 +172,18 @@
                                 <c:if test="${vs.index !=0}">
                                     <c:if test="${vs.index != fn:length(categories)-1 }">
                                         <li>
-                                            <a href="${pageContext.request.contextPath }/ProductServlet?op=findProductByCid&cid=${category.cid}">${category.cname}</a>
+                                            <a href="${pageContext.request.contextPath }/findProductByCid?op=findProductByCid&cid=${category.cid}">${category.cname}</a>
                                         </li>
                                     </c:if>
                                 </c:if>
                                 <c:if test="${vs.index==0 }">
                                     <li class="first">
-                                        <a href="${pageContext.request.contextPath }/ProductServlet?op=findProductByCid&cid=${category.cid}">${category.cname}</a>
+                                        <a href="${pageContext.request.contextPath }/findProductByCid?op=findProductByCid&cid=${category.cid}">${category.cname}</a>
                                     </li>
                                 </c:if>
                                 <c:if test="${vs.index == fn:length(categories)-1 }">
                                     <li class="last">
-                                        <a href="${pageContext.request.contextPath }/ProductServlet?op=findProductByCid&cid=${category.cid}">${category.cname}</a>
+                                        <a href="${pageContext.request.contextPath }/findProductByCid?op=findProductByCid&cid=${category.cid}">${category.cname}</a>
                                     </li>
                                 </c:if>
                             </c:forEach>
@@ -199,7 +199,7 @@
                     <c:choose>
                         <c:when test="${7 == product.cid}">
                             <div style="width: 620px" class="${vs.index % 3 != 2?'product_box':'product_box no_margin_right' }">
-                            <a href="${pageContext.request.contextPath }/ProductServlet?op=findProductsByName&pname=${product.description}">
+                            <a href="${pageContext.request.contextPath }/findProductsByName?op=findProductsByName&pname=${product.description}">
                                 <img src="files/${product.imgUrl}" width="620" height="300" alt=""
                                      title="${product.pname }"/>
                             </a>
@@ -211,7 +211,7 @@
                         </c:when>
                         <c:otherwise>
                             <div class="${vs.index % 3 != 2?'product_box':'product_box no_margin_right' }">
-                                <a href="${pageContext.request.contextPath }/ProductServlet?op=findProductByPid&pid=${product.pid}">
+                                <a href="${pageContext.request.contextPath }/findProductByPid?op=findProductByPid&pid=${product.pid}">
                                     <img src="files/${product.imgUrl }" width="200" height="300" alt=""
                                          title="${product.pname }"/>
                                 </a>
@@ -223,7 +223,7 @@
                                 <c:if test="${!empty user }">
                                     <a href="javascript:addCart(${product.pid },${user.uid})" class="addtocart"></a>
                                 </c:if>
-                                <a href="${pageContext.request.contextPath }/ProductServlet?op=findProductByPid&pid=${product.pid}"
+                                <a href="${pageContext.request.contextPath }/findProductByPid?op=findProductByPid&pid=${product.pid}"
                                    class="detail"></a>
                             </div>
                             <c:if test="${vs.index % 3 == 2}">
@@ -246,14 +246,14 @@
                                     <td width="49">
                                         <div align="center">
 											<span class="STYLE22">
-											<a href="${pageContext.request.contextPath }/ProductServlet?op=findProductByCid&cid=${condition.cid}&num=1">首页</a>
+											<a href="${pageContext.request.contextPath }/findProductByCid?op=findProductByCid&cid=${condition.cid}&num=1">首页</a>
 											</span>
                                         </div>
                                     </td>
                                     <td width="49">
                                         <div align="center">
 											<span class="STYLE22">
-											<a href="${pageContext.request.contextPath }/ProductServlet?op=findProductByCid&cid=${condition.cid}&num=${page.prevPageNum}">上一页</a>
+											<a href="${pageContext.request.contextPath }/findProductByCid?op=findProductByCid&cid=${condition.cid}&num=${page.prevPageNum}">上一页</a>
 											</span>
                                         </div>
                                     </td>
@@ -261,7 +261,7 @@
                                         <span class="STYLE22">
 									    <div align="center">
 											<span class="STYLE22">
-											<a href="${pageContext.request.contextPath }/ProductServlet?op=findProductByCid&cid=${condition.cid}&num=${page.nextPageNum}">下一页</a>
+											<a href="${pageContext.request.contextPath }/findProductByCid?op=findProductByCid&cid=${condition.cid}&num=${page.nextPageNum}">下一页</a>
 											</span>
 										</div>
                                         </span>
@@ -269,7 +269,7 @@
                                     <td width="49">
                                         <div align="center">
                                             <span class="STYLE22">
-                                                <a href="${pageContext.request.contextPath }/ProductServlet?op=findProductByCid&cid=${condition.cid}&num=${page.totalPageNum }">尾页</a></span>
+                                                <a href="${pageContext.request.contextPath }/findProductByCid?op=findProductByCid&cid=${condition.cid}&num=${page.totalPageNum }">尾页</a></span>
                                         </div>
                                     </td>
                                     <td width="37" class="STYLE22">
@@ -330,7 +330,7 @@
         }
         var param = "&cid=${condition.cid}";
 
-        window.location.href = "${pageContext.request.contextPath }/ProductServlet?op=findProductByCid&num=" + num + param;
+        window.location.href = "${pageContext.request.contextPath }/findProductByCid?op=findProductByCid&num=" + num + param;
 
     }
 </script>

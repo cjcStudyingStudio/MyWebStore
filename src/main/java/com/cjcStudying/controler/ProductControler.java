@@ -1,6 +1,7 @@
 package com.cjcStudying.controler;
 
 import com.cjcStudying.domain.Product;
+import com.cjcStudying.domain.SearchCondition;
 import com.cjcStudying.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,11 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -61,49 +63,9 @@ public class ProductControler {
         }
     }
 
-    /**
-     *
-     * @return 返回商品信息
-     */
 
-    @RequestMapping("/mainProduct")
-    public void mainProduct(HttpServletRequest request,
-                                HttpServletResponse response){
-//        productService.findTopProducts();
-        List<Product> products = productService.findAllProduct();
-        request.setAttribute("hotProducts", products);
-        request.setAttribute("topProducts", products);
-        try {
-            request.getRequestDispatcher("/index.jsp").forward(request, response);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
-    /**
-     * @param op
-     * @param response
-     */
-    @RequestMapping("/findProductsByName")
-    public void findProductsByName(@RequestParam("op")String op,
-                                   @RequestParam("num")String num,
-                                   Product product,
-                                   HttpServletRequest request,
-                                   HttpServletResponse response){
-        if(op.equals("op")) {
-            //首页进来num为null num变为1
-            if (null == num || num.isEmpty() || "0".equals(num)) num = "1";
-            try {
-                request.getRequestDispatcher("/searchProducts.jsp").forward(request, response);
-            } catch (ServletException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+
 
     /**
      * cid
@@ -197,6 +159,95 @@ public class ProductControler {
                                   @RequestParam("pid")String pid,
                                    ModelAndView modelAndView,
                                    HttpServletRequest request){
+        modelAndView.setViewName("redirect:"+request.getContextPath()+"/admin/product/productList.jsp");
+        if(op.equals("deleteOne")){
+            Boolean flag = productService.deleteProductByPid(pid);
+            //同时需要删除本地图片为完成！
+            if(flag){
+                modelAndView.addObject("result","商品删除成功");
+            }else {
+                modelAndView.addObject("result","商品删除失败");
+            }
+            List<Product> productList = productService.findAllProduct();
+            request.setAttribute("productList",productList);
+        }
+        return modelAndView;
+    }
+
+    /**
+     * num: 1
+     * op: multiConditionSearch
+     * pid: 321412412   第一搜索条件
+     * cid: 1376582235  第三搜索条件
+     * pname: 天下第一   第二搜索条件
+     * minprice: 4214    第四搜索条件
+     * maxprice: 5534    第四搜索条件
+     * search: 查询
+     * @return  /admin/product/productSearchList.jsp productList
+     */
+    @RequestMapping("/multiConditionSearch")
+    public String multiConditionSearch(@RequestParam("op")String op,
+                                       String num,
+                                       SearchCondition searchCondition,
+                                       HttpServletRequest request) throws IOException {
+        List<Product> productList = new ArrayList<Product>();
+        if(op.equals("multiConditionSearch")) {
+            if (searchCondition.getPid() != null && !searchCondition.getPid().isEmpty()) {
+                Product product = productService.findProductByPid(searchCondition.getPid());
+                productList.add(product);
+            } else if (searchCondition.getPname() != null && !searchCondition.getPname().isEmpty()) {
+                if (searchCondition.getCid() != null) {
+                    if (searchCondition.getMinprice() != null) {
+                        if (searchCondition.getMaxprice() != null) {
+                            productList = productService.findProductByPnameAndCidAndMinpAndMaxp(searchCondition);
+                        } else {
+                            productList = productService.findProductByPnameAndCidAndMinp(searchCondition);
+                        }
+                    }else if(searchCondition.getMaxprice() != null) {
+                        productList = productService.findProductByPnameAndCidAndMaxp(searchCondition);
+                    } else {
+                        productList = productService.findProductByPnameAndCid(searchCondition);
+                    }
+                } else if(searchCondition.getMinprice() != null){
+                    if (searchCondition.getMaxprice() != null) {
+                        productList = productService.findProductByPnameAndMinpAndMaxp(searchCondition);
+                    } else {
+                        productList = productService.findProductByPnameAndMinp(searchCondition);
+                    }
+
+                }else if(searchCondition.getMaxprice() != null){
+                    productList = productService.findProductByPnameAndMaxp(searchCondition);
+                } else {
+                    productList = productService.findProductByPname(searchCondition);
+                }
+            } else if (searchCondition.getCid() != null) {
+                if (searchCondition.getMinprice() != null) {
+                    if (searchCondition.getMaxprice() != null) {
+                        productList = productService.findProductByCidAndMinpAndMaxp(searchCondition);
+                    } else {
+                        productList = productService.findProductByCidAndMinp(searchCondition);
+                    }
+                } else if(searchCondition.getMaxprice() != null){
+                    productList = productService.findProductByCidAndMaxp(searchCondition);
+                }else {
+                    productList = productService.findProductByCid(searchCondition);
+                }
+            }
+        }
+        //只靠价格查询暂时未开发
+        request.setAttribute("productList", productList);
+        return "forward:"+request.getContextPath()+"/admin/product/productSearchList.jsp";
+    }
+
+    /**
+     * op: findCategoryByUpdate
+     * pid: 1acf966a83304625a3164996f50f022c
+     */
+    @RequestMapping("/findCategoryByUpdate")
+    public ModelAndView findCategoryByUpdate(@RequestParam("op")String op,
+                                  @RequestParam("pid")String pid,
+                                  ModelAndView modelAndView,
+                                  HttpServletRequest request){
         modelAndView.setViewName("forward:"+request.getContextPath()+"/admin/product/productList.jsp");
         if(op.equals("deleteOne")){
             Boolean flag = productService.deleteProductByPid(pid);
@@ -212,14 +263,41 @@ public class ProductControler {
         return modelAndView;
     }
 
+    @RequestMapping("/findProductByPid")
+    public String findProductByPid(@RequestParam("pid")String pid,
+                                 HttpSession session,
+                                 HttpServletRequest request){
+        Product product = productService.findProductByPid(pid);
+        System.out.println(product);
+        session.setAttribute("product",product);
+        return "forward:"+request.getContextPath()+"/admin/product/updateProduct.jsp";
+    }
+
     /**
-     * num: 1
-     * op: multiConditionSearch
-     * pid: 321412412
-     * cid: 1376582235
-     * pname: 天下第一
-     * minprice: 4214
-     * maxprice: 5534
-     * search: 查询
+     * op: updateProduct
+     * imgurl:  暂不开发
+     * cid: 1
+     * pid: e62b4f5ecb774436a65d720bb31a3501
+     * pNum: 22
+     * pname: 天下第一的书
+     * eStorePrice: 111.0
+     * markPrice: 222.0
+     * desc: 天下第一11111天下第一11111天下第一11111天下第一11111
      */
+    @RequestMapping("/updateProduct")
+    public ModelAndView updateProduct(@RequestParam("op")String op,
+                                   Product product,
+                                   ModelAndView modelAndView,
+                                   HttpServletRequest request){
+        modelAndView.setViewName("redirect:"+request.getContextPath()+"/admin/product/productList.jsp");
+        if(op.equals("updateProduct")){
+            Boolean flag = productService.updateProduct(product);
+            if(flag){
+                modelAndView.addObject("result","修改成功");
+            }else {
+                modelAndView.addObject("result","修改失败");
+            }
+        }
+        return modelAndView;
+    }
 }

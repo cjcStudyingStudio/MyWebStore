@@ -1,10 +1,9 @@
 package com.cjcStudying.domain;
 
-import java.io.UnsupportedEncodingException;
 import java.util.Random;
 
 public class Category {
-    private int cid;
+    private Integer cid;
     private String cname;
 
     public Category() {
@@ -21,7 +20,7 @@ public class Category {
                 '}';
     }
 
-    public int getCid() {
+    public Integer getCid() {
         return cid;
     }
 
@@ -34,13 +33,14 @@ public class Category {
     }
 
     public void setCname(String cname) {
-        String now = cname;
-        try {
-            now = new String(cname.getBytes("iso-8859-1"),"utf-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-//        System.out.println(now);
-        this.cname = now;
+//        String now = cname;
+//        try {
+//            now = new String(cname.getBytes("iso-8859-1"),"utf-8");
+//        } catch (UnsupportedEncodingException e) {
+//            e.printStackTrace();
+//        }
+////        System.out.println(now);
+
+        this.cname = cname;
     }
 }

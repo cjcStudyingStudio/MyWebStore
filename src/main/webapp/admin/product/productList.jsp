@@ -53,8 +53,8 @@ body {
 <body>
 
 <script type="text/javascript">
-	if(<%=request.getParameter("deleteProductResult")!=null%>){
-		alert("<%=request.getParameter("deleteProductResult")%>")
+	if(<%=request.getParameter("result")!=null%>){
+		alert("<%=request.getParameter("result")%>")
 	}
 </script>
 	<form action="${pageContext.request.contextPath }/ProductServlet" method="post">
@@ -172,7 +172,7 @@ body {
 							<td height="20" bgcolor="#FFFFFF">
 								<div align="center" class="STYLE21">
 									<a href="${pageContext.request.contextPath }/product/deleteOne?op=deleteOne&pid=${product.pid}">删除</a> |
-									<a href="${pageContext.request.contextPath }/CategoryServlet?op=findCategoryByUpdate&pid=${product.pid}">编辑</a>
+									<a href="${pageContext.request.contextPath }/category/findAllCategory?op=findCategoryByUpdate&pid=${product.pid}">编辑</a>
 								</div>
 							</td>
 					</tr>

@@ -105,7 +105,7 @@
 
 <body>
 <c:if test="${empty categories }">
-    <jsp:forward page="/MainServlet"/>
+    <jsp:forward page="${pageContext.request.contextPath}/mainProduct"/>
 </c:if>
 <div id="templatemo_body_wrapper">
     <div id="templatemo_wrapper">
@@ -134,12 +134,12 @@
         <div id="templatemo_menubar" style="position: relative;">
             <div id="top_nav" class="ddsmoothmenu">
                 <ul>
-                    <li><a href="${pageContext.request.contextPath }/MainServlet" class="selected">主页</a></li>
+                    <li><a href="${pageContext.request.contextPath }/mainProduct" class="selected">主页</a></li>
                 </ul>
                 <br style="clear: left"/>
             </div> <!-- end of ddsmoothmenu -->
             <div id="templatemo_search" onmouseleave="dispear(document.getElementById('hintContent'))">
-                <form action="${pageContext.request.contextPath }/ProductServlet" method="get">
+                <form action="${pageContext.request.contextPath }/findProductsByName" method="get">
                     <input type="hidden" name="op" value="findProductsByName"/>
                     <input type="text" value="${condition.pname}" name="pname" id="keyword" title="keyword"
                            onfocus="clearText(this)" onblur="clearText(this)" onkeypress="hint()" class="txt_field"/>
@@ -171,18 +171,18 @@
                                 <c:if test="${vs.index !=0}">
                                     <c:if test="${vs.index != fn:length(categories)-1 }">
                                         <li>
-                                            <a href="${pageContext.request.contextPath }/ProductServlet?op=findProductByCid&cid=${category.cid}">${category.cname}</a>
+                                            <a href="${pageContext.request.contextPath }/findProductByCid?op=findProductByCid&cid=${category.cid}">${category.cname}</a>
                                         </li>
                                     </c:if>
                                 </c:if>
                                 <c:if test="${vs.index==0 }">
                                     <li class="first">
-                                        <a href="${pageContext.request.contextPath }/ProductServlet?op=findProductByCid&cid=${category.cid}">${category.cname}</a>
+                                        <a href="${pageContext.request.contextPath }/findProductByCid?op=findProductByCid&cid=${category.cid}">${category.cname}</a>
                                     </li>
                                 </c:if>
                                 <c:if test="${vs.index == fn:length(categories)-1 }">
                                     <li class="last">
-                                        <a href="${pageContext.request.contextPath }/ProductServlet?op=findProductByCid&cid=${category.cid}">${category.cname}</a>
+                                        <a href="${pageContext.request.contextPath }/findProductByCid?op=findProductByCid&cid=${category.cid}">${category.cname}</a>
                                     </li>
                                 </c:if>
                             </c:forEach>
@@ -194,21 +194,21 @@
 
                 <span><h3 style="width:600px;heigth=40px;background: #EEEEEE; padding: 10px"> Products </h3></span>
 
-                <c:forEach items="${page.records}" var="product" varStatus="vs">
+                <c:forEach items="${productList}" var="product" varStatus="vs">
                     <div class="${vs.index % 3 != 2?'product_box':'product_box no_margin_right' }">
-                        <a href="${pageContext.request.contextPath }/ProductServlet?op=findProductByPid&pid=${product.pid}">
-                            <img src="files/${product.imgUrl }" width="200" height="300" alt=""
+                        <a href="${pageContext.request.contextPath }/findProductByPid?op=findProductByPid&pid=${product.pid}">
+                            <img src="${pageContext.request.contextPath}${product.imgUrl}" width="200" height="300" alt=""
                                  title="${product.pname }"/>
                         </a>
                         <p>${product.pname }</p>
-                        <p class="product_price">￥ ${product.estorePrice }</p>
+                        <p class="product_price">￥ ${product.eStorePrice }</p>
                         <c:if test="${empty user }">
                             <a href="javascript:login()" class="addtocart"></a>
                         </c:if>
                         <c:if test="${!empty user }">
                             <a href="javascript:addCart(${product.pid },${user.uid})" class="addtocart"></a>
                         </c:if>
-                        <a href="${pageContext.request.contextPath }/ProductServlet?op=findProductByPid&pid=${product.pid}"
+                        <a href="${pageContext.request.contextPath }/findProductByPid?op=findProductByPid&pid=${product.pid}"
                            class="detail"></a>
                     </div>
                     <c:if test="${vs.index % 3 == 2}">
@@ -318,7 +318,7 @@
 
     function searchPageSplit(num) {
         var param = "&pname=${condition.pname}";
-        window.location.href = "${pageContext.request.contextPath }/ProductServlet?op=findProductsByName&num=" + num + param;
+        window.location.href = "${pageContext.request.contextPath }/findProductsByName?op=findProductsByName&num=" + num + param;
     }
 
 </script>

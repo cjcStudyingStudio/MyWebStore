@@ -61,7 +61,7 @@ public class CategoryControler {
     }
 
     /**
-     * op: findAllCategory  findAllCategoryToProducts searchProduct
+     * op: findAllCategory  findAllCategoryToProducts searchProduct findCategoryByUpdate
      * num: 1
      */
     @RequestMapping(value = "/findAllCategory",produces={"text/html;charset=UTF-8"})
@@ -70,7 +70,8 @@ public class CategoryControler {
                                   HttpSession session,
                                   HttpServletRequest request,
                                   HttpServletResponse response) throws UnsupportedEncodingException {
-        if(op.equals("findAllCategory")||op.equals("findAllCategoryToProducts")||op.equals("searchProduct")){
+        if(op.equals("findAllCategory")||op.equals("findAllCategoryToProducts")
+                ||op.equals("searchProduct")||op.equals("findCategoryByUpdate")){
             List<Category> categoryList = categoryService.findAllCategory();
             session.setAttribute("categoryList",categoryList);
         }
@@ -79,6 +80,9 @@ public class CategoryControler {
         }
         if(op.equals("searchProduct")){
             return request.getContextPath()+"/admin/product/searchProduct.jsp";
+        }
+        if(op.equals("findCategoryByUpdate")){
+            return request.getContextPath()+"/product/findProductByPid";
         }
         return request.getContextPath()+"/admin/category/categoryList.jsp";
 
@@ -122,5 +126,26 @@ public class CategoryControler {
                 e.printStackTrace();
             }
         }
+    }
+
+    /**
+     * op: deleteCategory
+     * cid: 1376873567
+     */
+    @RequestMapping("/deleteCategory")
+    public ModelAndView deleteCategory(@RequestParam("op")String op,
+                                       @RequestParam("cid")Integer cid,
+                                      ModelAndView modelAndView,
+                                      HttpServletRequest request){
+        modelAndView.setViewName("redirect:"+request.getContextPath()+"/admin/product/productList.jsp");
+        if(op.equals("deleteCategory")){
+            Boolean flag = categoryService.deleteCategory(cid);
+            if(flag){
+                modelAndView.addObject("result","删除成功");
+            }else {
+                modelAndView.addObject("result","删除失败");
+            }
+        }
+        return modelAndView;
     }
 }

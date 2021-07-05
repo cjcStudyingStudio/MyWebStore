@@ -131,5 +131,15 @@ public class ProductDaoTest {
     }
 
 
+    @Test
+    public void test1(){
+        Product product = productDao.selectProductByPid("25775e141c6d4b75be3e83b2a3a9b6cb");
+        System.out.println(product);
+    }
 
+    @Test
+    public void test2(){
+        List<Product> products = productDao.selectAllProduct();
+        System.out.println(products);
+    }
 }

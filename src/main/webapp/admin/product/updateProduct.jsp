@@ -45,10 +45,13 @@
 		</style>
 	</head>
 	<body>
+
+
+
 	<%-- <form method="post" action="${pageContext.request.contextPath }/ProductServlet" enctype="multipart/form-data"> --%>
-	<form method="post" action="${pageContext.request.contextPath }/ProductServlet">
+	<form method="post" action="${pageContext.request.contextPath }/product/updateProduct">
 		<input type="hidden" name="op" value="updateProduct"/>
-		<input type="hidden" name="imgurl" value="${product.imgurl }">
+		<input type="hidden" name="imgUrl" value="${product.imgUrl }">
 		
 		 
 		
@@ -105,7 +108,7 @@
 						<td width="80%" height="20" bgcolor="d3eaef" class="STYLE6"><div
 								align="left">
  							<select name="cid" id="st" onchange="change()">
-								<c:forEach items="${categories}" var="category">
+								<c:forEach items="${categoryList}" var="category">
 									<option value="${category.cid}">${category.cname}</option>
 								</c:forEach>	
 							</select>
@@ -154,7 +157,7 @@
 						<td width="80%" height="20" bgcolor="d3eaef" class="STYLE6"><div
 								align="left">
  							 
-						<input type="text "  name="pnum" value="${product.pnum }"/>
+						<input type="text "  name="pNum" value="${product.pNum }"/>
 						 
 							</div>
 						</td>
@@ -202,7 +205,7 @@
 						<td width="80%" height="20" bgcolor="d3eaef" class="STYLE6"><div
 								align="left">
  							 
-						<input type="text " name="estoreprice" value="${product.estoreprice}"/><br>
+						<input type="text " name="eStorePrice" value="${product.eStorePrice}"/><br>
 						 
 							</div>
 						</td>
@@ -224,7 +227,7 @@
 						<td width="80%" height="20" bgcolor="d3eaef" class="STYLE6"><div
 								align="left">
  							 
-						<input type="text " name="markprice" value="${product.markprice }"/><br>
+						<input type="text " name="markPrice" value="${product.markPrice }"/><br>
 						 
 							</div>
 						</td>
@@ -246,8 +249,7 @@
 								align="left">
  							 
  							<%-- <input type="file" name="imgurl"  value="${product.imgurl}"/><br> --%>						 
-							
-							<img width="200px" height="180px" src="${pageContext.request.contextPath}/files/${product.imgurl}"/>
+							<img width="200px" height="180px" src="${pageContext.request.contextPath}${product.imgUrl}"/>
 							
 							</div>
 						</td>
@@ -268,7 +270,7 @@
 						<td width="80%" height="20" bgcolor="d3eaef" class="STYLE6"><div
 								align="left">
  							 
-						     <textarea name="description" cols="80" rows="5" >${product.description}</textarea>
+						     <textarea name="desc" cols="80" rows="5" >${product.desc}</textarea>
 						 
 							</div>
 						</td>

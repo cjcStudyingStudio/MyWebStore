@@ -51,9 +51,13 @@ body {
 }
 -->
 </style>
+
 </head>
 
 <body>
+<c:if test="${empty categoryList}">
+	<jsp:forward page="${pageContext.request.contextPath}/category/findAllCategory?op=findAllCategory"/>
+</c:if>
 	<form action="${pageContext.request.contextPath }/category/deleteMulti" method="post">
 	<input type="hidden" name="op" value="deleteMulti"/>
 	<table width="100%" border="0" align="center" cellpadding="0"
@@ -136,14 +140,14 @@ body {
 						</td>
 						<td width="15%" height="20" bgcolor="#d3eaef" class="STYLE6"><div
 								align="center"><fmt:requestEncoding value="utf-8"/>
-							<span class="STYLE10">${category.cname}这是中文</span>
+							<span class="STYLE10">${category.cname}</span>
 						</div>
 						</td>
 						<td width="14%" height="20" bgcolor="#d3eaef" class="STYLE6"><div
 								align="center">
 								<span class="STYLE10">
 								<a href="${pageContext.request.contextPath }/admin/category/updateCategory.jsp?cname=${category.cname}&cid=${category.cid}">编辑</a>|
-								<a href="${pageContext.request.contextPath }/CategoryServlet?op=deleteCategory&cid=${category.cid}">删除</a>
+								<a href="${pageContext.request.contextPath }/category/deleteCategory?op=deleteCategory&cid=${category.cid}">删除</a>
 								</span>
 						</div>
 						</td>

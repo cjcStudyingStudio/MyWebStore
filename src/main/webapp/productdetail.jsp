@@ -139,12 +139,12 @@ ddsmoothmenu.init({
     <div id="templatemo_menubar" style="position: relative;">
     	<div id="top_nav" class="ddsmoothmenu">
             <ul>
-                <li><a href="${pageContext.request.contextPath }/MainServlet" class="selected">主页</a></li>
+                <li><a href="${pageContext.request.contextPath }/mainProduct" class="selected">主页</a></li>
             </ul>
             <br style="clear: left" />
         </div> <!-- end of ddsmoothmenu -->
         <div id="templatemo_search" onmouseleave="dispear(document.getElementById('hintContent'))">
-            <form action="${pageContext.request.contextPath }/ProductServlet" method="get">
+            <form action="${pageContext.request.contextPath }/findProductsByName" method="get">
               <input type="hidden" name="op" value="findProductsByName"/>
               <input type="text" value="${pname }" name="pname" id="keyword" title="keyword"
                      onfocus="clearText(this)" onblur="clearText(this)" onkeypress="hint()" class="txt_field" />
@@ -175,18 +175,18 @@ ddsmoothmenu.init({
                 			<c:if test="${vs.index !=0}">
                 				<c:if test="${vs.index != fn:length(categories)-1 }">
                 					<li>
-                						<a href="${pageContext.request.contextPath }/ProductServlet?op=findProductByCid&cid=${category.cid}">${category.cname}</a>
+                						<a href="${pageContext.request.contextPath }/findProductByCid?op=findProductByCid&cid=${category.cid}">${category.cname}</a>
                 					</li>
                 				</c:if>
                 			</c:if>
                 			<c:if test="${vs.index==0 }">
                 				<li class="first">
-                					<a href="${pageContext.request.contextPath }/ProductServlet?op=findProductByCid&cid=${category.cid}">${category.cname}</a>
+                					<a href="${pageContext.request.contextPath }/findProductByCid?op=findProductByCid&cid=${category.cid}">${category.cname}</a>
                 				</li>
                 			</c:if>
                 			<c:if test="${vs.index == fn:length(categories)-1 }">
                 				<li class="last">
-                					<a href="${pageContext.request.contextPath }/ProductServlet?op=findProductByCid&cid=${category.cid}">${category.cname}</a>
+                					<a href="${pageContext.request.contextPath }/findProductByCid?op=findProductByCid&cid=${category.cid}">${category.cname}</a>
                 				</li>
                 			</c:if>
                 		</c:forEach>
@@ -199,13 +199,13 @@ ddsmoothmenu.init({
         	<h3>${product.pname}</h3>
             <div class="content_half float_l">
         	<%--<a  rel="lightbox[portfolio]" href="images/product/10_l.jpg">--%>
-        	<img src="files/${product.imgUrl }" style="width: 200px; height: 300px" /></a>
+        	<img src="${pageContext.request.contextPath}${product.imgUrl }" style="width: 200px; height: 300px" /></a>
             </div>
             <div class="content_half float_r">
                 <table>
                     <tr>
                         <td width="160">商城价格:</td>
-                        <td>${product.estorePrice}</td>
+                        <td>${product.eStorePrice}</td>
                     </tr>
                     <tr>
                         <td>市场价格:</td>
@@ -217,7 +217,7 @@ ddsmoothmenu.init({
                     </tr>
                     <tr>
                     	<td>购买数量:</td>
-                        <td><input type="text" id="snum" value="1" style="width: 20px; text-align: right" />&nbsp;库存:${product.pnum }</td>
+                        <td><input type="text" id="snum" value="1" style="width: 20px; text-align: right" />&nbsp;库存:${product.pNum }</td>
                     </tr>
                 </table>
                 <div class="cleaner h20"></div>
@@ -233,7 +233,7 @@ ddsmoothmenu.init({
             <div class="cleaner h30"></div>
             
             <h5>商品描述</h5>
-            <p>${requestScope.product.description }</p>	
+            <p>${requestScope.product.desc }</p>
         </div> 
         <div class="cleaner"></div>
     </div> <!-- END of templatemo_main -->

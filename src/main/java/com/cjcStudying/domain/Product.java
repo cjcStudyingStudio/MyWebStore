@@ -13,7 +13,6 @@ public class Product {
     private int cid;
     private String imgUrl;
     private String desc;
-    private Category category;
     private MultipartFile imgurl;
 
     public Product() {
@@ -32,7 +31,6 @@ public class Product {
                 ", cid=" + cid +
                 ", imgUrl='" + imgUrl + '\'' +
                 ", desc='" + desc + '\'' +
-                ", category=" + category +
                 ", imgurl=" + imgurl +
                 '}';
     }
@@ -43,14 +41,6 @@ public class Product {
 
     public void setImgurl(MultipartFile imgurl) {
         this.imgurl = imgurl;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
     }
 
     public String getPid() {

@@ -3,7 +3,6 @@ package com.cjcStudying.domain;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.Random;
 
@@ -95,14 +94,14 @@ public class User {
 
 
     public void setNickname(String nickname) {
-        String now = nickname;
-        try {
-             now = new String(nickname.getBytes("iso-8859-1"),"utf-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-//        System.out.println(now);
-        this.nickname = now;
+//        String now = nickname;
+//        try {
+//             now = new String(nickname.getBytes("iso-8859-1"),"utf-8");
+//        } catch (UnsupportedEncodingException e) {
+//            e.printStackTrace();
+//        }
+////        System.out.println(now);
+        this.nickname = nickname;
     }
 
 //    public void setNickname(String nickname) {
