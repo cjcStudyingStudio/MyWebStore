@@ -48,6 +48,25 @@ body {
 }
 -->
 </style>
+	<script>
+		function jump() {
+
+			var num = document.getElementById("num").value;
+			if (!/^[1-9][0-9]*$/.test(num)) {
+				alert("请输入正确的页码");
+				return;
+			}
+
+			if (num > ${page.totalPageNum}) {
+				alert("页码超出范围");
+				return;
+			}
+
+			window.location.href = "${pageContext.request.contextPath }/product/findAllCategory?op=findAllCategory&num="
+					+ num;
+
+		}
+	</script>
 </head>
 
 <body>
@@ -142,7 +161,7 @@ body {
 							</div>
 						</td>
 					</tr>
-					<c:forEach items="${productList }" var="product">
+					<c:forEach items="${pageInfo.getList() }" var="product">
 						<tr>
 							<td height="20" bgcolor="#FFFFFF">
 								<div align="center">
@@ -190,7 +209,7 @@ body {
 					<tr>
 						<td width="33%"><div align="left">
 								<span class="STYLE22">&nbsp;&nbsp;&nbsp;&nbsp;共有<strong>
-										${page.totalRecordsNum }</strong> 条记录，当前第<strong>${page.currentPageNum }</strong> 页，共 <strong>${page.totalPageNum }</strong> 页</span>
+										${pageInfo.getEndRow() }</strong> 条记录，当前第<strong>${pageInfo.getPageNum() }</strong> 页，共 <strong>${pageInfo.getPages() }</strong> 页</span>
 							</div>
 						</td>
 						<td width="67%">
@@ -199,34 +218,34 @@ body {
 									<td width="49">
 										<div align="center">
 											<span class="STYLE22">
-											<a href="${pageContext.request.contextPath }/ProductServlet?op=findAllProduct&num=1">首页</a>
+											<a href="${pageContext.request.contextPath }/product/findAllProduct?op=findAllProduct&num=1">首页</a>
 											</span>
 										</div>
 									</td>
 									<td width="49">
 										<div align="center">
 											<span class="STYLE22">
-											<a href="${pageContext.request.contextPath }/ProductServlet?op=findAllProduct&num=${page.prevPageNum}">上一页</a>
+											<a href="${pageContext.request.contextPath }/product/findAllProduct?op=findAllProduct&num=${pageInfo.getPrePage()}">上一页</a>
 											</span>
 										</div>
 									</td>
 									<td width="49"><span class="STYLE22">
 									    <div align="center">
 											<span class="STYLE22">
-											<a href="${pageContext.request.contextPath }/ProductServlet?op=findAllProduct&num=${page.nextPageNum}">下一页</a>
+											<a href="${pageContext.request.contextPath }/product/findAllProduct?op=findAllProduct&num=${pageInfo.getNextPage()}">下一页</a>
 											</span>
 										</div>
 									</td>
 									<td width="49">
 										<div align="center">
-											<span class="STYLE22"><a href="${pageContext.request.contextPath }/ProductServlet?op=findAllProduct&num=${page.totalPageNum }">尾页</a></span>
+											<span class="STYLE22"><a href="${pageContext.request.contextPath }/product/findAllProduct?op=findAllProduct&num=${pageInfo.getPages() }">尾页</a></span>
 										</div>
 									</td>
 									<td width="37" class="STYLE22"><div align="center">转到</div>
 									</td>
 									<td width="22">
 										<div align="center">
-											<input type="text" name="num" id="num" value="${page.currentPageNum }" style="width:20px; height:12px; font-size:12px; border:solid 1px #7aaebd;" />
+											<input type="text" name="num" id="num" value="${pageInfo.getPageNum() }" style="width:20px; height:12px; font-size:12px; border:solid 1px #7aaebd;" />
 										</div>
 									</td>
 									<td width="22" class="STYLE22"><div align="center">页</div>
@@ -255,23 +274,7 @@ body {
 				}
 			})
 		})
-		function jump() {
-			
-			var num = document.getElementById("num").value;
-			if (!/^[1-9][0-9]*$/.test(num)) {
-				alert("请输入正确的页码");
-				return;
-			}
-	
-			if (num > ${page.totalPageNum}) {
-				alert("页码超出范围");
-				return;
-			}
-	
-			window.location.href = "${pageContext.request.contextPath }/ProductServlet?op=findAllCategory&num="
-					+ num;
-	
-		}
+
 	</script>
 </body>
 </html>

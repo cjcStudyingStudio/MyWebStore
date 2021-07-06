@@ -3,6 +3,8 @@ package com.cjcStudying.controler;
 import com.cjcStudying.domain.Product;
 import com.cjcStudying.domain.SearchCondition;
 import com.cjcStudying.service.ProductService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -143,10 +145,26 @@ public class ProductControler {
      */
     @RequestMapping("/findAllProduct")
     public String findAllProduct(@RequestParam("op")String op,
-                                 @RequestParam("num")String num,
+                                 @RequestParam("num")Integer num,
                                  HttpServletRequest request) throws IOException {
+        PageHelper.startPage(num,6);
         List<Product> productList = productService.findAllProduct();
-        request.setAttribute("productList",productList);
+        PageInfo<Product> pageInfo = new PageInfo<Product>(productList);
+        System.out.println(pageInfo);
+//        pageInfo.getList()
+//        总共页数
+//        pageInfo.getPages()
+//        当前页数
+//        pageInfo.getPageNum()
+//        总共条数
+//        pageInfo.getEndRow()
+//        前一页
+//        pageInfo.getPrePage();
+//        下一页
+//        pageInfo.getNextPage();
+//        pageInfo.getPages();
+        pageInfo.getPageNum();
+        request.setAttribute("pageInfo",pageInfo);
         return "forward:"+request.getContextPath()+"/admin/product/productList.jsp";
     }
 

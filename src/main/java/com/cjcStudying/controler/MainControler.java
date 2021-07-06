@@ -126,4 +126,22 @@ public class MainControler {
         }
         return "redirect:"+request.getContextPath()+"shoppingCart/findShoppingCart?op=findShoppingCart&uid="+uid;
     }
+
+    //实现分页
+
+//    @RequestMapping(value = "pageinfo", method = RequestMethod.GET)
+//    public PageInfo<Product> getPageInfo(int pageNum, int pageSize) {
+//        /*
+//        1.通过调用PageHelper的静态方法开始获取分页数据
+//        pageNum: 当前第几页,
+//        pageSize:每页多少条数
+//        * */
+//        PageHelper.startPage(pageNum, pageSize);
+//        //2.获取所有的数据
+//        List<Product> list = productService.getAll();
+//        //3.获取当前分页对象
+//        PageInfo<Product> pageInfo = new PageInfo<Product>(list);
+//        return pageInfo;
+//    }
+
 }

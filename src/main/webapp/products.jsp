@@ -231,7 +231,7 @@
                     <tr>
                         <td width="33%">
                             <div align="left">
-								<span class="STYLE22">&nbsp;&nbsp;&nbsp;&nbsp;共有<strong>
+								<span class="STYLE22"> 共有<strong>
                                     ${page.totalRecordsNum }</strong> 条记录，当前第<strong>${page.currentPageNum }</strong> 页，共 <strong>${page.totalPageNum }</strong> 页</span>
                             </div>
                         </td>

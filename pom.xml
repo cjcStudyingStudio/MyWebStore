@@ -142,6 +142,15 @@
       <version>2.10.0</version>
     </dependency>
 
+    <!-- https://mvnrepository.com/artifact/com.github.pagehelper/pagehelper -->
+<!--    实现分页-->
+    <dependency>
+      <groupId>com.github.pagehelper</groupId>
+      <artifactId>pagehelper</artifactId>
+      <version>5.2.1</version>
+    </dependency>
+
+
   </dependencies>
 
 
