@@ -14,6 +14,7 @@ public class Product {
     private String imgUrl;
     private String desc;
     private MultipartFile imgurl;
+    private Category category;
 
     public Product() {
         String s = UUID.randomUUID().toString().replace("-", "");
@@ -32,7 +33,16 @@ public class Product {
                 ", imgUrl='" + imgUrl + '\'' +
                 ", desc='" + desc + '\'' +
                 ", imgurl=" + imgurl +
+                ", category=" + category +
                 '}';
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public MultipartFile getImgurl() {

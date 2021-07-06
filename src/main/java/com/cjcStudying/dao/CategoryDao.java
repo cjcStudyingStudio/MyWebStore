@@ -22,4 +22,6 @@ public interface CategoryDao {
     @Select("select cid, cname from category")
     List<Category> findAllCategory() throws DataAccessException;
 
+    @Select("select cname from category where cid = #{cid}")
+    Category selectCategoryCnameByCid(@Param("cid")int cid);
 }

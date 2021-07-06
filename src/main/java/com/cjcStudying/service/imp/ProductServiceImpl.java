@@ -1,12 +1,15 @@
 package com.cjcStudying.service.imp;
 
 import com.cjcStudying.dao.ProductDao;
+import com.cjcStudying.domain.Category;
 import com.cjcStudying.domain.Product;
 import com.cjcStudying.domain.SearchCondition;
+import com.cjcStudying.service.CategoryService;
 import com.cjcStudying.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -15,6 +18,8 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private ProductDao productDao;
+    @Autowired
+    private CategoryService categoryService;
 
     @Override
     public Boolean addProduct(Product product) throws DataAccessException {
@@ -40,9 +45,15 @@ public class ProductServiceImpl implements ProductService {
         return product;
     }
 
+    @Transactional
     @Override
     public List<Product> findAllProduct() throws DataAccessException{
         List<Product> products = productDao.selectAllProduct();
+        for (Product p:products
+             ) {
+            Category category = categoryService.findCategoryCnameByCid(p.getCid());
+            p.setCategory(category);
+        }
         return products;
     }
 

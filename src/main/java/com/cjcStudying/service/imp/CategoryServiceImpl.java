@@ -38,4 +38,10 @@ public class CategoryServiceImpl implements CategoryService {
         return categories;
     }
 
+    @Override
+    public Category findCategoryCnameByCid(int cid) {
+        Category category = categoryDao.selectCategoryCnameByCid(cid);
+        return category;
+    }
+
 }

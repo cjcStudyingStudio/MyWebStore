@@ -12,6 +12,7 @@ public class Order {
     private Integer state;
     private Date orderTime;
     private String uid;
+    private User user;
     //还没做
 //    private Product product;
 
@@ -34,7 +35,16 @@ public class Order {
                 ", state=" + state +
                 ", orderTime=" + orderTime +
                 ", uid='" + uid + '\'' +
+                ", user=" + user +
                 '}';
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getOid() {

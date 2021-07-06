@@ -13,4 +13,6 @@ public interface UserService {
     Boolean updateUser(User user);
 
     List<User> findAllUser();
+
+    User findUserByUid(String uid);
 }

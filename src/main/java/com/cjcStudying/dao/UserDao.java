@@ -41,4 +41,8 @@ public interface UserDao {
     @Select("select uid,username,nickname,password,email,birthday,updatetime " +
             "from user")
     List<User> selectAllUser();
+
+    @Select("select username " +
+            "from user where uid = #{uid}")
+    User selectUsernameByUid(@Param("uid") String uid);
 }

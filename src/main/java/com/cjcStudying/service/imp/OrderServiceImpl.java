@@ -3,8 +3,10 @@ package com.cjcStudying.service.imp;
 import com.cjcStudying.dao.OrderDao;
 import com.cjcStudying.domain.Order;
 import com.cjcStudying.domain.OrderItem;
+import com.cjcStudying.domain.User;
 import com.cjcStudying.service.OrderService;
 import com.cjcStudying.service.ShoppingCartService;
+import com.cjcStudying.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,8 @@ public class OrderServiceImpl implements OrderService {
     OrderDao orderDao;
     @Autowired
     ShoppingCartService shoppingCartService;
+    @Autowired
+    UserService userService;
 
     @Override
     public Boolean placeOrder(Order order) throws DataAccessException {
@@ -32,9 +36,15 @@ public class OrderServiceImpl implements OrderService {
         return flag;
     }
 
+    @Transactional
     @Override
     public List<Order> findAllOrder() throws DataAccessException{
         List<Order> orders = orderDao.selectAllOrder();
+        for (Order o:orders
+             ) {
+            User user = userService.findUserByUid(o.getUid());
+            o.setUser(user);
+        }
         return orders;
     }
 

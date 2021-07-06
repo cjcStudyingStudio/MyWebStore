@@ -179,7 +179,7 @@
 								<div align="center"><fmt:formatDate value="${order.orderTime}" type="date" pattern="yyyy-MM-dd hh:mm:ss"/></div>
 							</td>
 							<td height="7" bgcolor="#FFFFFF" class="STYLE19">
-<%--								<div align="center">${order.user.username}</div>--%>
+								<div align="center">${order.user.username}</div>
 								<div align="center"></div>
 							</td>
 							<td height="10" bgcolor="#FFFFFF">

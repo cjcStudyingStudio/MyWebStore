@@ -64,4 +64,10 @@ public class UserServiceImpl implements UserService {
         List<User> userList = userDao.selectAllUser();
         return userList;
     }
+
+    @Override
+    public User findUserByUid(String uid) {
+        User user = userDao.selectUsernameByUid(uid);
+        return user;
+    }
 }

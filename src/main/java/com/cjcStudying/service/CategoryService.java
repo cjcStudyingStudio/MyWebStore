@@ -14,4 +14,5 @@ public interface CategoryService {
 
     List<Category> findAllCategory() throws DataAccessException;
 
+    Category findCategoryCnameByCid(int cid);
 }
