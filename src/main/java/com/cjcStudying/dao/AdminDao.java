@@ -30,4 +30,7 @@ public interface AdminDao {
             "set password = #{admin.password} " +
             "where username = #{admin.username}")
     Boolean updateAdminPassword(@Param("admin") Admin admin);
+
+    @Select("select aid from admin where username = #{username}")
+    Admin selectAdminByUsername(@Param("username")String username);
 }

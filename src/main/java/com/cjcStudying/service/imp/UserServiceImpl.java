@@ -37,14 +37,17 @@ public class UserServiceImpl implements UserService {
         Boolean flag = false;
         Boolean flag2 = false;
         try {
-            flag = userDao.saveUser(user);
-            ShoppingCart shoppingCart = new ShoppingCart();
-            shoppingCart.setUid(user.getUid());
-            flag2 = shoppingCartService.addShoppingCart(shoppingCart);
+            User user1 = userDao.selectUserByUsername(user.getUsername());
+            if(user1==null) {
+                flag = userDao.saveUser(user);
+                ShoppingCart shoppingCart = new ShoppingCart();
+                shoppingCart.setUid(user.getUid());
+                flag2 = shoppingCartService.addShoppingCart(shoppingCart);
+                return flag;
+            }
+            return false;
         }catch (DataAccessException e){
             throw e;
-        }finally {
-            return flag&flag2;
         }
     }
 

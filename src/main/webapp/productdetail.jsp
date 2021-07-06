@@ -239,8 +239,9 @@ ddsmoothmenu.init({
     </div> <!-- END of templatemo_main -->
     
     <div id="templatemo_footer">
-    	Copyright (c) 2018 <a href="#">Books 书城</a> | <a href="#">Web工作室</a>
-    </div> <!-- END of templatemo_footer -->
+        Copyright (c) 2021 <a href="#">Cjc Webstore</a> | <a href="#">CjcWeb工作室</a>
+
+     </div> <!-- END of templatemo_footer -->
     
 </div> <!-- END of templatemo_wrapper -->
 </div> <!-- END of templatemo_body_wrapper -->

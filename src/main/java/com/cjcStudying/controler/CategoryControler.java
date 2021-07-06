@@ -137,7 +137,7 @@ public class CategoryControler {
                                        @RequestParam("cid")Integer cid,
                                       ModelAndView modelAndView,
                                       HttpServletRequest request){
-        modelAndView.setViewName("redirect:"+request.getContextPath()+"/admin/product/productList.jsp");
+        modelAndView.setViewName("redirect:"+request.getContextPath()+"/category/findAllCategory?op=findAllCategory&num=1");
         if(op.equals("deleteCategory")){
             Boolean flag = categoryService.deleteCategory(cid);
             if(flag){

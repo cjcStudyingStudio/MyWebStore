@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Books Store, free template</title>
+    <title>CJCWebtore, free template</title>
     <meta name="keywords" content="shoes store, free template, ecommerce, online shop, website templates, CSS, HTML"/>
     <meta name="description" content="Shoes Store is a free ecommerce template provided "/>
     <link href="css/templatemo_style.css" rel="stylesheet" type="text/css"/>
@@ -265,7 +265,7 @@
         </div> <!-- END of templatemo_main -->
 
         <div id="templatemo_footer">
-            Copyright (c) 2018 <a href="#">Books 书城</a> | <a href="#">Web工作室</a>
+            Copyright (c) 2021 <a href="#">Cjc Webstore</a> | <a href="#">CjcWeb工作室</a>
         </div>
     </div>
 </div>

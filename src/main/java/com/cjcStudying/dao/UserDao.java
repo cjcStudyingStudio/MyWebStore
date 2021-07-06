@@ -45,4 +45,8 @@ public interface UserDao {
     @Select("select username " +
             "from user where uid = #{uid}")
     User selectUsernameByUid(@Param("uid") String uid);
+
+    @Select("select uid " +
+            "from user where username = #{username}")
+    User selectUserByUsername(@Param("username")String username);
 }
