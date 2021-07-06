@@ -48,7 +48,7 @@ public class UserControler {
             User user = userService.login(username, password);
             if (user != null) {
                 session.setAttribute("user",user);
-                if(remember_me.equals("on")){
+                if(remember_me!=null&&remember_me.equals("on")){
                     Cookie cookie = new Cookie("username", username);
                     Cookie cookie1 = new Cookie("password", password);
                     response.addCookie(cookie);

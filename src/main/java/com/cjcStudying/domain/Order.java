@@ -17,9 +17,10 @@ public class Order {
 
     public Order() {
         String s = UUID.randomUUID().toString().replace("-", "");
-        this.uid = s;
+        this.oid = s;
         Date date = new Date();
         this.orderTime = date;
+        this.state = 1;
     }
 
     @Override

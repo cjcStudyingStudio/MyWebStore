@@ -115,4 +115,36 @@ public class OrderControler {
             }
         }
     }
+
+    /**
+     * uid: 1217310874
+     * op: placeOrder
+     * recipients: 阿里巴巴
+     * tel: 13246579811
+     * address: 天河机场
+     * pid: a0cdac3db7c248b8876365851120bfe0
+     * pid: dbfc7ee81a7048d6a7ca48e1e0a78d65
+     * pid: 73b5fc3b0e1f46fc883f9dae611b26b2
+     * money: 932.4
+     * 下单完成后删除购物车项目
+     */
+    @RequestMapping("/placeOrder")
+    public void placeOrder(@RequestParam("op")String op,
+                            Order order,
+                            String[] pid,
+                            HttpServletResponse response){
+        if(op.equals("placeOrder")){
+            Boolean flag = false;
+            flag = orderService.placeOrderAndItems(order,pid);
+            try {
+                if(flag){
+                    response.getWriter().println("已下单！");
+                }else {
+                    response.getWriter().println("让服务器再跑会儿，请稍后再试！");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

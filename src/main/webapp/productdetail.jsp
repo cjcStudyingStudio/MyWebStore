@@ -123,14 +123,14 @@ ddsmoothmenu.init({
 	        <c:if test="${!empty user }">
 		        <a href="${pageContext.request.contextPath }/user/personal.jsp">我的个人中心</a> |
         	</c:if>
-	        <a href="${pageContext.request.contextPath }/user/CartServlet?op=findCart">购物车</a> |
-	        <c:if test="${ empty user }">
+                <a href="${pageContext.request.contextPath }/shoppingCart/findShoppingCart?op=findShoppingCart&uid=${user.uid}">购物车</a>|
+ 	        <c:if test="${ empty user }">
 	        	<a href="${pageContext.request.contextPath }/user/login.jsp">登录</a> |
 	        	<a href="${pageContext.request.contextPath }/user/register.jsp">注册</a></p>
 	        </c:if>
 	        <c:if test="${!empty user }">
 	        	${user.nickname }
-	        	<a href="${pageContext.request.contextPath }/user/UserServlet?op=lgout">退出</a></p>
+	        	<a href="${pageContext.request.contextPath }/user/lgout?op=lgout">退出</a></p>
 	        </c:if> 
 		</div>
         <div class="cleaner"></div>
@@ -226,7 +226,7 @@ ddsmoothmenu.init({
 	                <a href="javascript:login()" class="addtocart"></a>
 	            </c:if>
 	            <c:if test="${!empty user }">
-	                <a href="javascript:addCart(${product.pid },${user.uid})" class="addtocart"></a>
+                    <a href="${pageContext.request.contextPath }/shoppingCart/addToShoppingCart?op=addCartFromProductdetail&pid=${product.pid }&uid=${user.uid}"
 	            </c:if>
                 <a href="javascript:history.go(-1);">返回</a>
 			</div>
@@ -249,10 +249,10 @@ ddsmoothmenu.init({
 			alert("请先登录");
 			window.location.href="${pageContext.request.contextPath}/user/login.jsp";
 		}
-		function addCart(pid,uid){
-			var snum = $("#snum").val();
-			window.location.href="${pageContext.request.contextPath}/user/CartServlet?op=addCart&pid="+pid+"&uid="+uid+"&snum="+snum;
-		}
+		<%--function addCart(pid,uid){--%>
+		<%--	var snum = $("#snum").val();--%>
+		<%--	window.location.href="${pageContext.request.contextPath}/user/CartServlet?op=addCart&pid="+pid+"&uid="+uid+"&snum="+snum;--%>
+		<%--}--%>
 	</script>
 </body>
 </html>

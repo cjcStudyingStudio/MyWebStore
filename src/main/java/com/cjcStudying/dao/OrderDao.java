@@ -1,6 +1,7 @@
 package com.cjcStudying.dao;
 
 import com.cjcStudying.domain.Order;
+import com.cjcStudying.domain.OrderItem;
 import org.apache.ibatis.annotations.*;
 import org.springframework.dao.DataAccessException;
 
@@ -33,4 +34,9 @@ public interface OrderDao {
     @Select("select oid,money,recipients,tel,address,state,ordertime,uid " +
             "from `order` where uid = #{uid}")
     List<Order> selectOrderByUid(@Param("uid") String uid);
+
+    @Insert("insert into `orderitem` (itemid,oid ,pid) " +
+            "values " +
+            "(#{orderItem.itemid},#{orderItem.oid},#{orderItem.pid})")
+    Boolean insertItem(@Param("orderItem") OrderItem orderItem);
 }

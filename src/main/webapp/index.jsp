@@ -136,7 +136,7 @@
                     <c:if test="${!empty user }">
                         <a href="${pageContext.request.contextPath }/user/personal.jsp">我的个人中心</a> |
                     </c:if>
-                    <a href="${pageContext.request.contextPath }/user/CartServlet?op=findCart">购物车</a> |
+                    <a href="${pageContext.request.contextPath }/shoppingCart/findShoppingCart?op=findShoppingCart&uid=${user.uid}">购物车</a> |
                     <c:if test="${empty user }">
                     <a href="${pageContext.request.contextPath }/user/login.jsp">登录</a> |
                     <a href="${pageContext.request.contextPath }/user/register.jsp">注册</a></p>
@@ -275,9 +275,9 @@
         window.location.href = "${pageContext.request.contextPath}/user/login.jsp";
     }
 
-    function addCart(pid, uid) {
-        window.location.href = "${pageContext.request.contextPath}/shoppingCart/addToShoppingCart?op=addCart&pid=" + pid + "&uid=" + uid;
-    }
+    <%--function addCart(pid, uid) {--%>
+    <%--    window.location.href = "${pageContext.request.contextPath}/shoppingCart/addToShoppingCart?op=addCart&pid=" + pid + "&uid=" + uid;--%>
+    <%--}--%>
 </script>
 </body>
 </html>

@@ -2,10 +2,9 @@ package com.cjcStudying.dao;
 
 import com.cjcStudying.domain.ShoppingCart;
 import com.cjcStudying.domain.ShoppingItems;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
+
+import java.util.List;
 
 public interface ShoppingCartDao {
 
@@ -28,4 +27,20 @@ public interface ShoppingCartDao {
 
     @Update("update `shoppingitem` set snum = snum+1 where itemid = #{itemid}")
     Boolean updateShoppingItemSnum(@Param("itemid")String itemid);
+
+    @Select("select itemid ,pid , snum from `shoppingitem` " +
+            "where sid = (" +
+            "select `sid` from `shoppingcart` where uid = #{uid})")
+    List<ShoppingItems> selectShoppingCartByUid(@Param("uid") String uid);
+
+    @Delete("delete from `shoppingitem` where sid = " +
+            "(select sid from `shoppingcart` where uid = #{uid})" +
+            " and itemid = #{itemid}")
+    Boolean deleteItemByUidAndItemid(@Param("uid") String uid,
+                                     @Param("itemid") String itemid);
+
+    @Delete("delete from `shoppingitem` " +
+            "where pid = #{pid} and sid = #{sid}")
+    Boolean deleteShoppingCartItemByPidAndSid(@Param("pid")String p,
+                                              @Param("sid")String sid);
 }

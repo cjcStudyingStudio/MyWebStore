@@ -117,7 +117,7 @@ ddsmoothmenu.init({
 	        <c:if test="${!empty user }">
 	        	<a href="${pageContext.request.contextPath }/user/personal.jsp">我的个人中心</a> |
 	        </c:if>
-	        <a href="${pageContext.request.contextPath }/user/CartServlet?op=findCart">购物车</a> |
+				<a href="${pageContext.request.contextPath }/shoppingCart/findShoppingCart?op=findShoppingCart&uid=${user.uid}">购物车</a>|
 	        <c:if test="${user == null }">
 	        	<a href="${pageContext.request.contextPath }/user/login.jsp">登录</a> |
 	        	<a href="${pageContext.request.contextPath }/user/register.jsp">注册</a>
@@ -129,7 +129,7 @@ ddsmoothmenu.init({
 	        </p>
 	        <p>
 		        <c:if test="${!empty user }">
-		        	<a href="${pageContext.request.contextPath }/user/OrderServlet?op=myoid">我的订单</a> |
+		        	<a href="${pageContext.request.contextPath }/order/myOrder?op=myoid&uid=${user.uid}">我的订单</a> |
 		        </c:if>
 	        </p>
 		</div>
@@ -219,7 +219,7 @@ ddsmoothmenu.init({
 			                            <td align="right">${item.product.eStorePrice } </td>
 			                            <td align="right">${item.product.eStorePrice * item.snum} </td>
 			                            <td align="center"> 
-			                            	<a href="${pageContext.request.contextPath }/user/CartServlet?op=delItem&uid=${user.uid}&itemId=${item.itemId}">
+			                            	<a href="${pageContext.request.contextPath }/delItem?op=delItem&uid=${user.uid}&itemid=${item.itemid}">
 			                            		<!-- <img src="images/remove_x.gif" alt="remove" /> <br />-->
 			                            		Remove
 			                            	</a> 
@@ -231,7 +231,7 @@ ddsmoothmenu.init({
 					</form>
                     <div style="float:right; width: 255px; margin-top: 20px;">
                     
-                    <c:if test="${!empty shoppingCart.shoppingItems}"><p><a href="${pageContext.request.contextPath }/user/placeOrder.jsp">立即购买</a></p></c:if>
+                    <c:if test="${!empty shoppingCart.shoppingItems}"><p><a href="${pageContext.request.contextPath }/shoppingCart/findShoppingCart?op=findShoppingCartByCart&uid=${user.uid}">立即购买</a></p></c:if>
                     <p><a href="${pageContext.request.contextPath}/index.jsp">继续购物</a></p>
                     	
                     </div>

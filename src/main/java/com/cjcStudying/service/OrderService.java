@@ -18,4 +18,6 @@ public interface OrderService {
     Boolean delectOrder(String oid);
 
     List<Order> findOrderByUid(String uid);
+
+    Boolean placeOrderAndItems(Order order, String[] pid);
 }

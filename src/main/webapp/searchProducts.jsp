@@ -101,6 +101,13 @@
         }
 
     </script>
+
+    <script type="text/javascript">
+        function login() {
+            alert("请先登录");
+            window.location.href = "${pageContext.request.contextPath}/user/login.jsp";
+        }
+    </script>
 </head>
 
 <body>
@@ -118,14 +125,14 @@
                     <c:if test="${!empty user }">
                         <a href="${pageContext.request.contextPath }/user/personal.jsp">我的个人中心</a> |
                     </c:if>
-                    <a href="${pageContext.request.contextPath }/user/CartServlet?op=findCart">购物车</a> |
+                    <a href="${pageContext.request.contextPath }shoppingCart/findShoppingCart?op=findShoppingCart&uid=${user.uid}">购物车</a> |
                     <c:if test="${empty user }">
                     <a href="${pageContext.request.contextPath }/user/login.jsp">登录</a> |
                     <a href="${pageContext.request.contextPath }/user/register.jsp">注册</a></p>
                 </c:if>
                 <c:if test="${!empty user }">
                     ${user.nickname }
-                    <a href="${pageContext.request.contextPath }/user/UserServlet?op=logout">退出</a></p>
+                    <a href="${pageContext.request.contextPath }/user/logout?op=logout">退出</a></p>
                 </c:if>
             </div>
             <div class="cleaner"></div>
@@ -202,11 +209,13 @@
                         </a>
                         <p>${product.pname }</p>
                         <p class="product_price">￥ ${product.eStorePrice }</p>
+
                         <c:if test="${empty user }">
                             <a href="javascript:login()" class="addtocart"></a>
                         </c:if>
                         <c:if test="${!empty user }">
-                            <a href="javascript:addCart(${product.pid },${user.uid})" class="addtocart"></a>
+                            <a href="${pageContext.request.contextPath }/shoppingCart/addToShoppingCart?op=addCartFromSearchProducts&pid=${product.pid }&uid=${user.uid}&pname=${product.pname}"
+                               class="addtocart"></a>
                         </c:if>
                         <a href="${pageContext.request.contextPath }/findProductByPid?op=findProductByPid&pid=${product.pid}"
                            class="detail"></a>
@@ -290,14 +299,11 @@
     </div> <!-- END of templatemo_wrapper -->
 </div> <!-- END of templatemo_body_wrapper -->
 <script type="text/javascript">
-    function login() {
-        alert("请先登录");
-        window.location.href = "user/login.jsp";
-    }
 
-    function addCart(pid, uid) {
-        window.location.href = "${pageContext.request.contextPath}/user/CartServlet?op=addCart&pid=" + pid + "&uid=" + uid;
-    }
+
+    <%--function addCart(pid, uid) {--%>
+    <%--    window.location.href = "${pageContext.request.contextPath}/user/CartServlet?op=addCart&pid=" + pid + "&uid=" + uid;--%>
+    <%--}--%>
 
     function jump() {
 

@@ -1,9 +1,10 @@
 package com.cjcStudying.domain;
 
+import java.util.List;
 import java.util.Random;
 
 public class ShoppingCart {
-    private ShoppingItems shoppingItems;
+    private List<ShoppingItems> shoppingItems;
     private Integer sid;
     private Integer uid;
 
@@ -22,11 +23,11 @@ public class ShoppingCart {
                 '}';
     }
 
-    public ShoppingItems getShoppingItems() {
+    public List<ShoppingItems> getShoppingItems() {
         return shoppingItems;
     }
 
-    public void setShoppingItems(ShoppingItems shoppingItems) {
+    public void setShoppingItems(List<ShoppingItems> shoppingItems) {
         this.shoppingItems = shoppingItems;
     }
 

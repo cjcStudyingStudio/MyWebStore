@@ -5,6 +5,7 @@ import com.cjcStudying.domain.Product;
 import com.cjcStudying.domain.SearchCondition;
 import com.cjcStudying.service.CategoryService;
 import com.cjcStudying.service.ProductService;
+import com.cjcStudying.service.ShoppingCartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,9 @@ public class MainControler {
 
     @Autowired
     private CategoryService categoryService;
+
+    @Autowired
+    private ShoppingCartService shoppingCartService;
 
     /**
      * op: index searchProduct
@@ -100,9 +104,26 @@ public class MainControler {
 //            List<Category> categoryList = categoryService.findAllCategory();
             request.setAttribute("productList",productList);
 //            session.setAttribute("categories", categoryList);
-            request.getRequestDispatcher(request.getContextPath()+"/searchProducts.jsp").forward(request, response);
+            request.getRequestDispatcher(request.getContextPath()+"/products.jsp").forward(request, response);
         }
     }
 
-
+    /**
+     * op: delItem
+     * uid: 1217310874
+     * itemid: 1945054959
+     */
+    @RequestMapping("/delItem")
+    public String delItem(@RequestParam("op")String op,
+                          @RequestParam("uid")String uid,
+                          @RequestParam("itemid")String itemid,
+                          HttpServletRequest request){
+        Boolean flag = shoppingCartService.deleteItemByUidAndItemid(uid,itemid);
+        if(flag){
+            request.setAttribute("addShoppingCartResult","从购物车移除成功");
+        }else {
+            request.setAttribute("addShoppingCartResult","发生位置错误，请稍后再试！");
+        }
+        return "redirect:"+request.getContextPath()+"shoppingCart/findShoppingCart?op=findShoppingCart&uid="+uid;
+    }
 }

@@ -167,7 +167,7 @@ body {
 								<div align="center">${product.pNum}</div>
 							</td>
 							<td height="20" bgcolor="#FFFFFF" class="STYLE19">
-								<div align="center">${product.category.cname}</div>
+<%--								<div align="center">${product.category.cname}</div>--%>
 							</td>
 							<td height="20" bgcolor="#FFFFFF">
 								<div align="center" class="STYLE21">

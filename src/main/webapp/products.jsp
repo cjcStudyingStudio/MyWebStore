@@ -2,7 +2,6 @@
          pageEncoding="utf-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@page isELIgnored="false" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -102,12 +101,23 @@
         }
 
     </script>
+
+    <script type="text/javascript">
+        function login() {
+            alert("请先登录");
+            window.location.href = "${pageContext.request.contextPath}/user/login.jsp";
+        }
+    </script>
 </head>
 
 <body>
-<%--<c:if test="${empty categories }">--%>
-<%--    <jsp:forward page="/MainServlet"/>--%>
-<%--</c:if>--%>
+<c:if test="${empty categories }">
+    <jsp:forward page="${pageContext.request.contextPath}/mainProduct"/>
+</c:if>
+
+<%--<script type="text/javascript">--%>
+<%--    alert(${user.nickname})--%>
+<%--</script>--%>
 <div id="templatemo_body_wrapper">
     <div id="templatemo_wrapper">
 
@@ -119,14 +129,14 @@
                     <c:if test="${!empty user }">
                         <a href="${pageContext.request.contextPath }/user/personal.jsp">我的个人中心</a> |
                     </c:if>
-                    <a href="${pageContext.request.contextPath }/user/CartServlet?op=findCart">购物车</a> |
+                    <a href="${pageContext.request.contextPath }shoppingCart/findShoppingCart?op=findShoppingCart&uid=${user.uid}">购物车</a> |
                     <c:if test="${empty user }">
                     <a href="${pageContext.request.contextPath }/user/login.jsp">登录</a> |
                     <a href="${pageContext.request.contextPath }/user/register.jsp">注册</a></p>
                 </c:if>
                 <c:if test="${!empty user }">
                     ${user.nickname }
-                    <a href="${pageContext.request.contextPath }/user/UserServlet?op=logout">退出</a></p>
+                    <a href="${pageContext.request.contextPath }/user/logout?op=logout">退出</a></p>
                 </c:if>
             </div>
             <div class="cleaner"></div>
@@ -135,14 +145,14 @@
         <div id="templatemo_menubar" style="position: relative;">
             <div id="top_nav" class="ddsmoothmenu">
                 <ul>
-                    <li><a href="${pageContext.request.contextPath }/MainServlet" class="selected">主页</a></li>
+                    <li><a href="${pageContext.request.contextPath }/mainProduct" class="selected">主页</a></li>
                 </ul>
                 <br style="clear: left"/>
             </div> <!-- end of ddsmoothmenu -->
             <div id="templatemo_search" onmouseleave="dispear(document.getElementById('hintContent'))">
-                <form action="${pageContext.request.contextPath }/product/findProductByPName" method="get">
+                <form action="${pageContext.request.contextPath }/findProductsByName" method="get">
                     <input type="hidden" name="op" value="findProductsByName"/>
-                    <input type="text" value="${pname }" name="pname" id="keyword" title="keyword"
+                    <input type="text" value="${condition.pname}" name="pname" id="keyword" title="keyword"
                            onfocus="clearText(this)" onblur="clearText(this)" onkeypress="hint()" class="txt_field"/>
                     <input type="submit" name="Search" value=" " alt="Search" id="searchbutton" title="Search"
                            class="sub_btn"/>
@@ -193,44 +203,29 @@
             </div>
             <div id="content" class="float_r">
 
-                <span><h3 style="width:600px;heigth:40px;background: #EEEEEE; padding: 10px"> Products </h3></span>
+                <span><h3 style="width:600px;heigth=40px;background: #EEEEEE; padding: 10px"> Products </h3></span>
 
-                <c:forEach items="${page.records}" var="product" varStatus="vs">
-                    <c:choose>
-                        <c:when test="${7 == product.cid}">
-                            <div style="width: 620px" class="${vs.index % 3 != 2?'product_box':'product_box no_margin_right' }">
-                            <a href="${pageContext.request.contextPath }/findProductsByName?op=findProductsByName&pname=${product.description}">
-                                <img src="files/${product.imgUrl}" width="620" height="300" alt=""
-                                     title="${product.pname }"/>
-                            </a>
-                            <p>${product.pname}</p>
-                            </div>
-                            <c:if test="${vs.index % 3 == 2}">
-                                <div class="cleaner"></div>
-                            </c:if>
-                        </c:when>
-                        <c:otherwise>
-                            <div class="${vs.index % 3 != 2?'product_box':'product_box no_margin_right' }">
-                                <a href="${pageContext.request.contextPath }/findProductByPid?op=findProductByPid&pid=${product.pid}">
-                                    <img src="files/${product.imgUrl }" width="200" height="300" alt=""
-                                         title="${product.pname }"/>
-                                </a>
-                                <p>${product.pname }</p>
-                                <p class="product_price">￥ ${product.estorePrice }</p>
-                                <c:if test="${empty user }">
-                                    <a href="javascript:login()" class="addtocart"></a>
-                                </c:if>
-                                <c:if test="${!empty user }">
-                                    <a href="javascript:addCart(${product.pid },${user.uid})" class="addtocart"></a>
-                                </c:if>
-                                <a href="${pageContext.request.contextPath }/findProductByPid?op=findProductByPid&pid=${product.pid}"
-                                   class="detail"></a>
-                            </div>
-                            <c:if test="${vs.index % 3 == 2}">
-                                <div class="cleaner"></div>
-                            </c:if>
-                        </c:otherwise>
-                    </c:choose>
+                <c:forEach items="${productList}" var="product" varStatus="vs">
+                    <div class="${vs.index % 3 != 2?'product_box':'product_box no_margin_right' }">
+                        <a href="${pageContext.request.contextPath }/findProductByPid?op=findProductByPid&pid=${product.pid}">
+                            <img src="${pageContext.request.contextPath}${product.imgUrl}" width="200" height="300" alt=""
+                                 title="${product.pname }"/>
+                        </a>
+                        <p>${product.pname }</p>
+                        <p class="product_price">￥ ${product.eStorePrice }</p>
+                        <c:if test="${empty user }">
+                            <a href="javascript:login()" class="addtocart"></a>
+                        </c:if>
+                        <c:if test="${!empty user }">
+                        <a href="${pageContext.request.contextPath }/shoppingCart/addToShoppingCart?op=addCartFromProducts&pid=${product.pid }&uid=${user.uid}&cid=${product.cid}"
+                           class="addtocart" onclick="login()"></a>
+                        </c:if>
+                        <a href="${pageContext.request.contextPath }/findProductByPid?op=findProductByPid&pid=${product.pid}"
+                           class="detail"></a>
+                    </div>
+                    <c:if test="${vs.index % 3 == 2}">
+                        <div class="cleaner"></div>
+                    </c:if>
                 </c:forEach>
                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
                     <tr>
@@ -246,14 +241,14 @@
                                     <td width="49">
                                         <div align="center">
 											<span class="STYLE22">
-											<a href="${pageContext.request.contextPath }/findProductByCid?op=findProductByCid&cid=${condition.cid}&num=1">首页</a>
+											<a href="javascript:searchPageSplit(1)">首页</a>
 											</span>
                                         </div>
                                     </td>
                                     <td width="49">
                                         <div align="center">
 											<span class="STYLE22">
-											<a href="${pageContext.request.contextPath }/findProductByCid?op=findProductByCid&cid=${condition.cid}&num=${page.prevPageNum}">上一页</a>
+											<a href="javascript:searchPageSplit(${page.prevPageNum})">上一页</a>
 											</span>
                                         </div>
                                     </td>
@@ -261,7 +256,7 @@
                                         <span class="STYLE22">
 									    <div align="center">
 											<span class="STYLE22">
-											<a href="${pageContext.request.contextPath }/findProductByCid?op=findProductByCid&cid=${condition.cid}&num=${page.nextPageNum}">下一页</a>
+											<a href="javascript:searchPageSplit(${page.nextPageNum})">下一页</a>
 											</span>
 										</div>
                                         </span>
@@ -269,7 +264,7 @@
                                     <td width="49">
                                         <div align="center">
                                             <span class="STYLE22">
-                                                <a href="${pageContext.request.contextPath }/findProductByCid?op=findProductByCid&cid=${condition.cid}&num=${page.totalPageNum }">尾页</a></span>
+                                                <a href="javascript:searchPageSplit(${page.totalPageNum })">尾页</a></span>
                                         </div>
                                     </td>
                                     <td width="37" class="STYLE22">
@@ -312,9 +307,9 @@
         window.location.href = "${pageContext.request.contextPath}/user/login.jsp";
     }
 
-    function addCart(pid, uid) {
-        window.location.href = "${pageContext.request.contextPath}/user/CartServlet?op=addCart&pid=" + pid + "&uid=" + uid;
-    }
+    <%--function addCart(pid, uid) {--%>
+    <%--    window.location.href = "${pageContext.request.contextPath}/user/CartServlet?op=addCart&pid=" + pid + "&uid=" + uid;--%>
+    <%--}--%>
 
     function jump() {
 
@@ -328,11 +323,16 @@
             alert("页码超出范围");
             return;
         }
-        var param = "&cid=${condition.cid}";
 
-        window.location.href = "${pageContext.request.contextPath }/findProductByCid?op=findProductByCid&num=" + num + param;
-
+        searchPageSplit(num);
+        <%--window.location.href = "${pageContext.request.contextPath }/ProductServlet?op=findProductByCid&num=" + num + param;--%>
     }
+
+    function searchPageSplit(num) {
+        var param = "&pname=${condition.pname}";
+        window.location.href = "${pageContext.request.contextPath }/findProductsByName?op=findProductsByName&num=" + num + param;
+    }
+
 </script>
 </body>
 </html>
