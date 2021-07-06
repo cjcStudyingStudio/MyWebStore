@@ -1,6 +1,7 @@
 package com.cjcStudying.controler;
 
 import com.cjcStudying.domain.Order;
+import com.cjcStudying.domain.OrderItem;
 import com.cjcStudying.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,15 +42,42 @@ public class OrderControler {
      */
     @RequestMapping("/delOrder")
     public void delOrder(@RequestParam("op")String op,
-                         @RequestParam("oid")String oid,
-                            HttpServletResponse response,
-                            HttpServletRequest request){
+                             String oid,
+                             HttpServletResponse response,
+                             HttpServletRequest request){
         if(op.equals("delOrder")){
             try {
                 response.setContentType("text/html;charset=utf-8");
                 request.setCharacterEncoding("utf-8");
                 response.setCharacterEncoding("utf-8");
-                Boolean flag = orderService.delectOrder(oid);
+                Boolean flag = orderService.deleteOrder(oid);
+                if(flag){
+                    response.getWriter().println("删除成功！");
+                }else {
+                    response.getWriter().println("删除失败！");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * op: delOrderItem
+     * oid: QWEQRTT4581
+     */
+    @RequestMapping("/delOrderItem")
+    public void delOrderItem(@RequestParam("op")String op,
+                         String oid,
+                         String itemid,
+                            HttpServletResponse response,
+                            HttpServletRequest request){
+        if(op.equals("delOrderItem")){
+            try {
+                response.setContentType("text/html;charset=utf-8");
+                request.setCharacterEncoding("utf-8");
+                response.setCharacterEncoding("utf-8");
+                Boolean flag = orderService.deleteOrderItemByItemid(itemid);
                 if(flag){
                     response.getWriter().println("删除成功！");
                 }else {
@@ -71,7 +99,7 @@ public class OrderControler {
                                HttpSession session,
                                HttpServletRequest request){
         if(op.equals("orderDetail")){
-            Order order = orderService.findOrderById(oid);
+            List<OrderItem> order = orderService.findOrderItemById(oid);
             session.setAttribute("order",order);
         }
         return request.getContextPath()+"/admin/order/orderDetails.jsp";
@@ -131,11 +159,12 @@ public class OrderControler {
     @RequestMapping("/placeOrder")
     public void placeOrder(@RequestParam("op")String op,
                             Order order,
+                            Integer[] buynum,
                             String[] pid,
                             HttpServletResponse response){
         if(op.equals("placeOrder")){
             Boolean flag = false;
-            flag = orderService.placeOrderAndItems(order,pid);
+            flag = orderService.placeOrderAndItems(order,pid,buynum);
             try {
                 if(flag){
                     response.getWriter().println("已下单！");

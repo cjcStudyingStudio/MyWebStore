@@ -6,6 +6,7 @@ public class OrderItem {
     private Integer itemid;
     private String oid;
     private String pid;
+    private Integer buynum;
 
     public OrderItem() {
         int i = new Random().nextInt();
@@ -19,7 +20,16 @@ public class OrderItem {
                 "itemid=" + itemid +
                 ", oid='" + oid + '\'' +
                 ", pid='" + pid + '\'' +
+                ", buynum=" + buynum +
                 '}';
+    }
+
+    public Integer getBuynum() {
+        return buynum;
+    }
+
+    public void setBuynum(Integer buynum) {
+        this.buynum = buynum;
     }
 
     public Integer getItemid() {

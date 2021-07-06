@@ -35,8 +35,18 @@ public interface OrderDao {
             "from `order` where uid = #{uid}")
     List<Order> selectOrderByUid(@Param("uid") String uid);
 
-    @Insert("insert into `orderitem` (itemid,oid ,pid) " +
+    @Insert("insert into `orderitem` (itemid,oid ,pid,buynum) " +
             "values " +
-            "(#{orderItem.itemid},#{orderItem.oid},#{orderItem.pid})")
+            "(#{orderItem.itemid},#{orderItem.oid},#{orderItem.pid}" +
+            ",#{orderItem.buynum})")
     Boolean insertItem(@Param("orderItem") OrderItem orderItem);
+
+    @Select("select itemid, oid,pid, buynum from `orderitem` where oid = #{oid}")
+    List<OrderItem> selectOrderItemByOid(@Param("oid")String oid);
+
+    @Delete("delete from `orderitem` where itemid = #{itemid}")
+    Boolean deleteOrderItemByItemid(@Param("itemid")String itemid);
+
+    @Delete("delete from `orderitem` where oid = #{oid}")
+    Boolean deleteOrderItemByOid(@Param("oid")String oid);
 }

@@ -54,10 +54,12 @@ public class OrderServiceImpl implements OrderService {
         return order;
     }
 
+    @Transactional
     @Override
-    public Boolean delectOrder(String oid) {
+    public Boolean deleteOrder(String oid) {
+        Boolean flag1 = orderDao.deleteOrderItemByOid(oid);
         Boolean flag = orderDao.delectOrderByOid(oid);
-        return flag;
+        return flag&flag1;
     }
 
     @Override
@@ -68,7 +70,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Transactional
     @Override
-    public Boolean placeOrderAndItems(Order order, String[] pid) {
+    public Boolean placeOrderAndItems(Order order, String[] pid,Integer[] buynum) {
         Boolean result = true;
         Boolean flag1 = false;
         Boolean flag2 = false;
@@ -77,12 +79,14 @@ public class OrderServiceImpl implements OrderService {
             //Oid 一个 item 多个  一对多
             flag1 = orderDao.insertOrder(order);
             result = flag1&result;
+            int i=0;
             for (String p:pid
                  ) {
 
                 OrderItem orderItem = new OrderItem();
                 orderItem.setOid(order.getOid());
                 orderItem.setPid(p);
+                orderItem.setBuynum(buynum[i]);
 
                 flag2 = orderDao.insertItem(orderItem);
                 result = flag2&result;
@@ -90,11 +94,24 @@ public class OrderServiceImpl implements OrderService {
                 String sid = shoppingCartService.findShoppingCartSidByUid(order.getUid());
                 flag3 = shoppingCartService.deleteShoppingCartItemByPidAndSid(p,sid);
                 result = flag3&result;
+                i++;
             }
 
         }else {
             return false;
         }
         return result;
+    }
+
+    @Override
+    public List<OrderItem> findOrderItemById(String oid) {
+        List<OrderItem> orderItem = orderDao.selectOrderItemByOid(oid);
+        return orderItem;
+    }
+
+    @Override
+    public Boolean deleteOrderItemByItemid(String itemid) {
+        Boolean flag = orderDao.deleteOrderItemByItemid(itemid);
+        return flag;
     }
 }

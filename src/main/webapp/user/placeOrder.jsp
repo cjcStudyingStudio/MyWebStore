@@ -242,6 +242,7 @@
                                     <td>${item.product.pname}</td>
                                     <td>${item.snum}</td>
                                     <td>${item.product.eStorePrice}</td>
+                                    <input type="hidden" id="buynum" name="buynum" value="${item.snum}"/>
                                     <td id="price">${item.snum * item.product.eStorePrice}</td>
                                 </tr>
                                 <c:set var="sum" value="${sum+item.snum*item.product.eStorePrice}"> </c:set>
